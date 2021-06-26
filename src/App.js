@@ -1,5 +1,6 @@
 import React from "react";
 import {Container} from "react-bootstrap";
+import "./assets/styles/main.scss"
 
 function App() {
   return (
