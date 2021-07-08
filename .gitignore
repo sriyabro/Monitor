@@ -12,6 +12,8 @@
 
 # testing
 /monitor-frontend/coverage
+/monitor-frontend/README.md
+/monitor-backend/README.md
 
 # production
 /monitor-frontend/build
