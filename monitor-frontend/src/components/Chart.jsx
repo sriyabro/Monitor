@@ -6,17 +6,12 @@ import {Activity, Plus} from 'react-feather';
 import {customStyles} from "../constants/constants";
 import AddSensor from "./AddSensor";
 
-
-const sensors = [
-    {name: 'Temp'},
-    {name: 'Humidity'},
-    {name: 'Water Level'}
-]
-
 function Chart() {
-      const [selectorOptions, setSelectorOptions] = useState(null);
-      const [selectedSensor, setSelectedSensor] = useState("No sensor selected");
-      const [showAddSensorModal, setShowAddSensorModal] = useState(false);
+        const [selectorOptions, setSelectorOptions] = useState(null);
+        const [selectedSensor, setSelectedSensor] = useState("No sensor selected");
+        const [showAddSensorModal, setShowAddSensorModal] = useState(false);
+
+        const [sensors, setSensors] = useState([]);
 
     useEffect(() => {
         if (!sensors) {
@@ -46,6 +41,13 @@ function Chart() {
         setShowAddSensorModal(false);
     }
 
+    const handleAddNewSensor = (newSensor) => {
+        let sensorlist = sensors.slice();
+        sensorlist.push({name: newSensor.name});
+        setSensors(sensorlist);
+        handleAddSensorModalClose();
+    }
+
     const data = {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
         datasets: [
@@ -60,15 +62,18 @@ function Chart() {
     };
 
 
-
     return (
+        <React.Fragment>
+        <AddSensor showModal={showAddSensorModal}
+                   handleClose={handleAddSensorModalClose}
+                   handleAddNewSensor={handleAddNewSensor}
+        />
         <Row className="sensors p-3 mb-5" >
-            <AddSensor showModal={showAddSensorModal} handleClose={handleAddSensorModalClose}/>
             <Col xs={12} md={4}>
                 <Select className="select-control" classNamePrefix="select-control"
                         isSearchable
                         isClearable
-                        noOptionsMessage={() => ("No Matching Sensors Found, Please Create New Sensor")}
+                        noOptionsMessage={() => ("No Sensors Found, Please Create a New Sensor")}
                         options={!selectorOptions ? [] : selectorOptions}
                         styles={customStyles}
                         onChange={handleSensorChange}
@@ -91,6 +96,7 @@ function Chart() {
                 <Line data={data}/>
             </Col>
         </Row>
+        </React.Fragment>
     )
 }
 

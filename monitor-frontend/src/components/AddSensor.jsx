@@ -1,8 +1,41 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Button, Col, FormControl, Modal, Row} from "react-bootstrap";
+import NumberFormat from "react-number-format";
+import Select from "react-select";
 
+const unitOptions = [
+    {label: 'C', value: 'C'},
+    {label: 'F', value: 'F'},
+    {label: 'm', value: 'm'},
+    {label: 'Km/h', value: 'Km/h'},
+]
 
 function AddSensor(props) {
+    const [sensorName, setSensorName] = useState(null);
+    const [sensorThreshold, setSensorThreshold] = useState(null);
+    const [sensorUnit, setSensorUnit] = useState(null);
+
+    const handleAddNewSensor = () => {
+        if (!sensorName || !sensorThreshold || sensorName === '' || sensorThreshold === '' || !sensorUnit )
+            return;
+        let newSensor = {
+            name: sensorName,
+            threshold: sensorThreshold,
+            unit: sensorUnit
+        }
+        props.handleAddNewSensor(newSensor);
+
+        setSensorName(null);
+        setSensorThreshold(null);
+        setSensorUnit(null);
+    }
+
+    const handleSensorNameChange = (e) => setSensorName(e.target.value);
+
+    const handleThresholdChange = (e) => setSensorThreshold(e.target.value);
+
+    const handleSensorUnitChange = (option) => setSensorUnit(option.value);
+
     return (
         <>
             <Modal
@@ -16,15 +49,36 @@ function AddSensor(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <Row>
-                        <Col xs={12}>Sensor Name : <FormControl></FormControl></Col>
-                        <Col xs={12}></Col>
+                        <Col xs={12}>
+                            &nbsp; Sensor Name
+                            <FormControl type="text"
+                                         autoFocus
+                                         onChange={handleSensorNameChange}
+                                         required/>
+                        </Col>
+                        <Col xs={8} className="pt-2">
+                            &nbsp; Threshold Value
+                            <NumberFormat className="form-control input-field"
+                                          displayType={'input'}
+                                          onChange={handleThresholdChange}
+                                          required/>
+                        </Col>
+                        <Col xs={4} className="pt-2">
+                            &nbsp; Unit
+                            <Select className="select-control" classNamePrefix="select-control"
+                                    noOptionsMessage={() => ("No Matching Sensors Found, Please Create New Sensor")}
+                                    options={unitOptions}
+                                    onChange={handleSensorUnitChange}
+                                    value={unitOptions.value}
+                            />
+                        </Col>
                     </Row>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button className="cancel text-danger border-danger" onClick={props.handleClose}>
                         Cancel
                     </Button>
-                    <Button className="add-sensor text-primary border-primary">Add Sensor</Button>
+                    <Button className="add-sensor text-primary border-primary" onClick={handleAddNewSensor}>Add Sensor</Button>
                 </Modal.Footer>
             </Modal>
         </>
