@@ -1,12 +1,15 @@
 import React from "react";
 import {Container} from "react-bootstrap";
 import "./assets/styles/main.scss"
+import './App.css';
+import Login from "./components/login";
 
 function App() {
   return (
-      <Container fluid={true}>
-           <h1>Monitor</h1>
-      </Container>
+      <div className="App">
+
+          <Login/>
+      </div>
 
   );
 }
