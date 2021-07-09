@@ -2,7 +2,6 @@ import React from 'react'
 import {Button, Col, Row} from "react-bootstrap";
 import {LogOut, User} from 'react-feather';
 
-
 function Header() {
     return (
         <Row className="p-3 header">

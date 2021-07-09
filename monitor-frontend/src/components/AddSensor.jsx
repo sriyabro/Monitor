@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Alert, Button, Col, FormControl, Modal, Row} from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import Select from "react-select";
-import {AlertTriangle} from "react-feather";
+import {AlertTriangle, Thermometer} from "react-feather";
 
 const unitOptions = [
     {label: 'C', value: 'C'},
@@ -55,7 +55,7 @@ function AddSensor(props) {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Add New Sensor</Modal.Title>
+                    <Modal.Title><Thermometer/>Add New Sensor</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Row>
@@ -78,7 +78,7 @@ function AddSensor(props) {
                                           onChange={handleThresholdChange}
                                           required/>
                         </Col>
-                        <Col xs={4} className="pt-2">
+                        <Col xs={4} className="pt-2 pl-0">
                             &nbsp; Unit
                             <Select className="select-control" classNamePrefix="select-control"
                                     options={unitOptions}
