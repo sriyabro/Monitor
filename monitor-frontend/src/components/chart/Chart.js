@@ -1,7 +1,8 @@
-import React from 'react'
-import { Dropdown } from "react-bootstrap";
-
-import { Line } from "react-chartjs-2";
+import React, {useEffect, useState} from 'react'
+import Select from 'react-select';
+import {Line} from "react-chartjs-2";
+import {Col, Row} from "react-bootstrap";
+import {Plus} from 'react-feather';
 
 const data = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
@@ -16,29 +17,59 @@ const data = {
     ]
 };
 
+const sensors = [
+    {
+        name: 'Temp'
+    },
+    {
+        name: 'Humidity'
+    },
+    {
+        name: 'Water Level'
+    }
+]
+
+
 function Chart() {
+      const [selectorOptions, setSelectorOptions] = useState(null);
+
+
+    useEffect(() => {
+        if (!sensors) {
+            return;
+        }
+        let options = [];
+        sensors.forEach((sensor) => {
+            options?.push({
+                label: sensor.name,
+                value: sensor.name
+            })
+        })
+        if (!options) return;
+        setSelectorOptions(options);
+    }, [sensors]);
 
     return (
+        <Row className="p-3 mb-5 bg-white rounded" >
+            <Col xs={4}>
+                <Select className="select-control" classNamePrefix="select-control"
+                    isSearchable
+                    isClearable
+                    placeholder={null}
+                    noOptionsMessage={() => ("No Matching Sensors Found, Please Create New Sensor")}
+                    options={!selectorOptions ? [] : selectorOptions}
+                    // onChange={handleSensorChange}
+                    // value={selectorOptions?.filter(option => option.label === sensors?.name)}
+                />
+            </Col>
+           <Col xs={8} className="text-right">
+               <Plus/><span className="p-0"> Add New Sensor</span>
+           </Col>
 
-        <div class="shadow-lg p-3 mb-5 bg-white rounded" >
-            <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    Select Sensor
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Sensor 1</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Sensor 2</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Sensor 3</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
-            <br></br>
-
-            <div >
+            <Col xs={12} >
                 <Line data={data} />
-            </div>
-
-        </div>
+            </Col>
+        </Row>
     )
 }
 

@@ -1,12 +1,11 @@
 import React from 'react'
-import "./Header.css";
 import {Button, Col, Row} from "react-bootstrap";
 import {LogOut, User} from 'react-feather';
 
 
 function Header() {
     return (
-        <Row className="py-2 header">
+        <Row className="py-3 header">
             <Col xs={6} >
                 <h1 className="logo pl-2">Monitor</h1>
             </Col>

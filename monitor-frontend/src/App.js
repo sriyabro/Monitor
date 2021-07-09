@@ -14,11 +14,7 @@ function App() {
 
     <Container fluid={true}>
         <Router>
-            <Switch>
-                <Route path="/">
-                    <Header />
-                </Route>
-            </Switch>
+            <Header />
             <Switch>
                 <Route path="/chart">
                     <Chart />
