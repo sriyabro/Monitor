@@ -4,18 +4,17 @@ const alertUser = (sensor, value) => {
 
     let user_email = sensor.sensor_user.user_Email;
     let user_tp = sensor.sensor_user.user_Contact;
-    let message = "Reading of sensor " + sensor.sensor_name + " : " + value +
+    let message = "Reading of " + sensor.sensor_name + " : " + value +
         " is over the threshold, Please login to Monitor and check the sensors";
 
-
-    //send email with nodemailer
+    //send email alert with nodemailer
     let mailOptions = {
         from: {
             name: config.monitor_app,
             address: config.admin_email
         },
         to: user_email,
-        subject: 'Monitor Alert',
+        subject: 'Sensor Alert',
         text: message
     };
 
@@ -27,6 +26,8 @@ const alertUser = (sensor, value) => {
             console.log("Error Email !!!", error);
         });
 
+
+    //send SMS alert with vonage
     config.vonage.message.sendSms(config.monitor_app, user_tp, message, (err, responseData) => {
         if (err) {
             console.log("Error SMS !!! ", err);
