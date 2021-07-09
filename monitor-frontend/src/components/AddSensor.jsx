@@ -55,7 +55,7 @@ function AddSensor(props) {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title><Thermometer/>Add New Sensor</Modal.Title>
+                    <Modal.Title className="pl-3">Add New Sensor</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Row>
