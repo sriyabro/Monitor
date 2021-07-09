@@ -26,6 +26,18 @@ const alertUser = (sensor, value) => {
         .catch(error => {
             console.log("Error Email !!!", error);
         });
+
+    config.vonage.message.sendSms(config.monitor_app, user_tp, message, (err, responseData) => {
+        if (err) {
+            console.log("Error SMS !!! ", err);
+        } else {
+            if(responseData.messages[0]['status'] === "0") {
+                console.log("Message sent successfully. : ", user_tp);
+            } else {
+                console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`);
+            }
+        }
+    });
 };
 
 module.exports = alertUser;
