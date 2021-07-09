@@ -13,14 +13,20 @@ let transporter = nodemailer.createTransport({
 
 const alertUser = (sensor, value) => {
 
+    let user_email = sensor.sensor_user.user_Email;
+    let user_tp = sensor.sensor_user.user_Contact;
+    let message = "Reading of sensor " + sensor.sensor_name + " : " + value +
+        " is over the threshold, Please login to Monitor and check the sensors";
+
+    //send email with nodemailer
     let mailOptions = {
         from: {
             name: 'Monitor App',
             address: process.env.EMAIL
         },
-        to: sensor.sensor_user.user_Email,
+        to: user_email,
         subject: 'Monitor Alert',
-        text: sensor.sensor_name + " : " + value
+        text: message
     };
 
     transporter.sendMail(mailOptions)
