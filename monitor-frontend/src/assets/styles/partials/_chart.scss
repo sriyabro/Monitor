@@ -4,8 +4,15 @@
     color: green;
     border: 1px solid green;
   }
+  .new-sensor:hover {
+    background-color: rgba(92,184,92, 0.2);
+  }
+
   .history {
     background-color: transparent;
+  }
+  .history:hover {
+    background-color: rgba(217,83,79,0.2);
   }
   .chart {
     max-height: 50px;
