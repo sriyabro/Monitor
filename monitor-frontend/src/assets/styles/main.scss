@@ -1,6 +1,13 @@
-@import "~bootstrap/scss/bootstrap";
-
+@import "~bootstrap";
 * {
   margin: 0;
   padding: 0;
 }
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  color: #000;
+  font-size: 1em;
+}
+
+@import "partials/header";
