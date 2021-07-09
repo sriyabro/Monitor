@@ -7,6 +7,7 @@
 
 # dependencies
 /monitor-frontend/node_modules
+/monitor-backend/node_modules
 /monitor-frontend/.pnp
 /monitor-frontend/.pnp.js
 
@@ -14,6 +15,9 @@
 /monitor-frontend/coverage
 /monitor-frontend/README.md
 /monitor-backend/README.md
+
+/monitor-backend/.env
+
 
 # production
 /monitor-frontend/build
