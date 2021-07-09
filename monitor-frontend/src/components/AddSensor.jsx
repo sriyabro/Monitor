@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
-import {Button, Col, FormControl, Modal, Row} from "react-bootstrap";
+import {Alert, Button, Col, FormControl, Modal, Row} from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import Select from "react-select";
+import {AlertTriangle} from "react-feather";
 
 const unitOptions = [
     {label: 'C', value: 'C'},
@@ -14,10 +15,14 @@ function AddSensor(props) {
     const [sensorName, setSensorName] = useState(null);
     const [sensorThreshold, setSensorThreshold] = useState(null);
     const [sensorUnit, setSensorUnit] = useState(null);
+    const [formInvalid, setFormInvalid] = useState(false);
 
     const handleAddNewSensor = () => {
-        if (!sensorName || !sensorThreshold || sensorName === '' || sensorThreshold === '' || !sensorUnit )
+        if (!sensorName || !sensorThreshold || sensorName === '' || sensorThreshold === '' || !sensorUnit ) {
+            setFormInvalid(true);
             return;
+        }
+        setFormInvalid(false);
         let newSensor = {
             name: sensorName,
             threshold: sensorThreshold,
@@ -36,11 +41,16 @@ function AddSensor(props) {
 
     const handleSensorUnitChange = (option) => setSensorUnit(option.value);
 
+    const handleClose = () => {
+        props.handleClose();
+        setFormInvalid(false);
+    }
+
     return (
         <>
             <Modal
                 show={props.showModal}
-                onHide={props.handleClose}
+                onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
             >
@@ -49,6 +59,11 @@ function AddSensor(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <Row>
+                        {formInvalid && <Col xs={12}>
+                            <Alert variant="danger" className="py-1 text-center">
+                                <AlertTriangle size={20}/> &nbsp; Please fill the required fields
+                            </Alert>
+                        </Col>}
                         <Col xs={12}>
                             &nbsp; Sensor Name
                             <FormControl type="text"
@@ -66,7 +81,6 @@ function AddSensor(props) {
                         <Col xs={4} className="pt-2">
                             &nbsp; Unit
                             <Select className="select-control" classNamePrefix="select-control"
-                                    noOptionsMessage={() => ("No Matching Sensors Found, Please Create New Sensor")}
                                     options={unitOptions}
                                     onChange={handleSensorUnitChange}
                                     value={unitOptions.value}
@@ -75,7 +89,7 @@ function AddSensor(props) {
                     </Row>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button className="cancel text-danger border-danger" onClick={props.handleClose}>
+                    <Button className="cancel text-danger border-danger" onClick={handleClose}>
                         Cancel
                     </Button>
                     <Button className="add-sensor text-primary border-primary" onClick={handleAddNewSensor}>Add Sensor</Button>
