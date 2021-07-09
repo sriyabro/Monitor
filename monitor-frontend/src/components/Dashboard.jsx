@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import {useHistory} from 'react-router-dom';
 import Select from 'react-select';
 import {Line} from "react-chartjs-2";
 import {Button, Col, Row} from "react-bootstrap";
@@ -6,12 +7,15 @@ import {Activity, Plus} from 'react-feather';
 import {customStyles} from "../constants/constants";
 import AddSensor from "./AddSensor";
 
-function Chart() {
+function Dashboard() {
         const [selectorOptions, setSelectorOptions] = useState(null);
         const [selectedSensor, setSelectedSensor] = useState("No sensor selected");
         const [showAddSensorModal, setShowAddSensorModal] = useState(false);
 
         const [sensors, setSensors] = useState([]);
+
+    const history = useHistory();
+
 
     useEffect(() => {
         if (!sensors) {
@@ -46,6 +50,10 @@ function Chart() {
         sensorlist.push({name: newSensor.name});
         setSensors(sensorlist);
         handleAddSensorModalClose();
+    }
+
+    const handleAlertHistoryButton = () => {
+        history.push('/alert-history');
     }
 
     const data = {
@@ -87,7 +95,7 @@ function Chart() {
 
             </Col>
            <Col xs={12} md={4} className="text-right">
-               <Button className="history text-danger border-danger">
+               <Button className="history text-danger border-danger" onClick={handleAlertHistoryButton}>
                    <Activity/> &nbsp; View Sensor Alert History
                </Button>
            </Col>
@@ -100,4 +108,4 @@ function Chart() {
     )
 }
 
-export default Chart;
+export default Dashboard;

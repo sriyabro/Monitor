@@ -1,21 +1,21 @@
-import Chart from '../components/Chart';
-import History from '../components/Table';
+import Dashboard from '../components/Dashboard';
+import AlertHistory from '../components/AlertHistory';
 
 const routes = [
     {
         path: '/',
         exact: true,
-        component: Chart,
-        name: 'Chart',
+        component: Dashboard,
+        name: 'Dashboard',
         protected: true
 
 
     },
     {
-        path: '/history',
+        path: '/alert-history',
         exact: true,
-        component: History,
-        name: 'Sensor History',
+        component: AlertHistory,
+        name: 'Sensor Alert History',
         protected: true
 
     },

@@ -2,8 +2,6 @@ import React from "react";
 import {Container} from "react-bootstrap";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import "./assets/styles/main.scss"
-
-
 import Header from "./components/Header"
 import routes from "./routes/routes";
 
