@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import "./assets/styles/main.scss"
 import Header from "./components/Header"
 import routes from "./routes/routes";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
                         />)}
                 </Switch>
             </BrowserRouter>
+            <Footer/>
         </div>
     </Container>
 
