@@ -11,7 +11,7 @@ function Header() {
             </Col>
             <Col xs={6} className="text-right">
                 <span className="mr-3 d-none d-md-inline"><User/> Username </span>
-                <Button className="logout my-2 py-1 px-3 "><label className="mb-1 p-0">Logout</label>&nbsp;&nbsp;<LogOut size={18}/></Button>
+                <Button className="logout my-2 py-1 px-3 ">Logout&nbsp;&nbsp;<LogOut size={18}/></Button>
             </Col>
         </Row>
     );
