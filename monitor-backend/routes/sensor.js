@@ -61,6 +61,29 @@ router.route('/data').post(async(req,res) => {
 
 });
 
+//get all sensor
+router.route('/').get((req,res) => {
+    Sensor.find()
+    .then(sensor => res.json(sensor))
+    .catch(err => res.status(400).json('Error: '+ err));
+});
+
+//get all sensor related to a specific user
+router.route('/:id').get(async(req,res) => {
+
+    try {
+        
+        let userOb = await User.findById(req.params.id);
+        let sensors = await Sensor.find({ sensor_user: userOb});
+        res.json(sensors)
+
+    } catch (error) {
+        res.status(400).json('Error: '+ error)
+    }
+
+});
+
+
 
 
 module.exports = router;
