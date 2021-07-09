@@ -27,7 +27,6 @@ app.use('/users' , userRouter);
 app.use('/sensors' , sensorRouter);
 
 
-
 app.listen(port, () => {
     console.log(`server is running on port : ${port}`);
 });

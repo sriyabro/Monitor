@@ -6,7 +6,7 @@ let User = require('../models/users.model');
  require('dotenv').config();
 
 
-
+//add user
 router.route('/add').post(async (req,res) => {
 
     try {
