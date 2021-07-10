@@ -62,7 +62,7 @@ const useStyles = makeStyles({
     },
 });
 
-function AlertHistory() {
+const AlertHistory = () => {
     const classes = useStyles();
     const history = useHistory();
 

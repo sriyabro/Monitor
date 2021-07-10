@@ -4,7 +4,7 @@ import {LogOut, User} from 'react-feather';
 import jwtDecode from "jwt-decode";
 import {useHistory} from 'react-router-dom';
 
-function Header() {
+const Header = () => {
 
     const jwt = localStorage.getItem("token");
     let userName = jwtDecode(jwt).user_Name;

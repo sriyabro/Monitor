@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react'
 import {useHistory} from 'react-router-dom';
 import Select from 'react-select';
-import {Line} from "react-chartjs-2";
 import {Button, Col, Row} from "react-bootstrap";
 import {Activity, Plus} from 'react-feather';
 import {customStyles} from "../constants/constants";
-import AddSensor from "./AddSensor";
 import Header from "./Header";
+import Chart from "./Chart";
+import AddSensor from "./AddSensor";
 import jwtDecode from "jwt-decode";
 import Axios from 'axios';
 
-function Dashboard() {
+const Dashboard = () => {
         const [selectorOptions, setSelectorOptions] = useState(null);
         const [selectedSensor, setSelectedSensor] = useState({label: "No Sensor Selected"});
         const [showAddSensorModal, setShowAddSensorModal] = useState(false);
@@ -74,20 +74,6 @@ function Dashboard() {
         history.push('/alert-history');
     }
 
-    const data = {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-        datasets: [
-            {
-                label: selectedSensor.label,
-                data: [250, 150, 55, 1, 223, 65],
-                fill: true,
-                backgroundColor: "rgba(75,192,192,0.2)",
-                borderColor: "rgba(75,192,192,1)"
-            }
-        ]
-    };
-
-
     return (
         <React.Fragment>
             <Header/>
@@ -99,7 +85,6 @@ function Dashboard() {
             <Col xs={12} lg={4}>
                 <Select className="select-control" classNamePrefix="select-control"
                         isSearchable
-                        isClearable
                         noOptionsMessage={() => ("No Sensors Found, Please Create a New Sensor")}
                         options={!selectorOptions ? [] : selectorOptions}
                         styles={customStyles}
@@ -118,10 +103,7 @@ function Dashboard() {
                    <Activity/> &nbsp; View Sensor Alert History
                </Button>
            </Col>
-
-            <Col xs={12} className="pt-3 chart">
-                <Line data={data}/>
-            </Col>
+            <Chart sensor={selectedSensor}/>
         </Row>
         </React.Fragment>
     )
