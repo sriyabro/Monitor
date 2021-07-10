@@ -43,7 +43,7 @@ const Login = ({ handleChange }) => {
               history.push('/dashboard');
               
         })
-        .catch((err) => {
+        .catch(() => {
           Swal.fire({
               icon: 'info',
               title: 'Invalid Login',
