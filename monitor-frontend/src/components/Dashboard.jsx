@@ -12,8 +12,8 @@ import Axios from 'axios';
 
 const Dashboard = () => {
         const [selectorOptions, setSelectorOptions] = useState(null);
-        const [selectedSensor, setSelectedSensor] = useState({label: "No Sensor Selected"});
         const [showAddSensorModal, setShowAddSensorModal] = useState(false);
+        const [selectedSensor, setSelectedSensor] =useState(null);
         const [sensors, setSensors] = useState([]);
         const history = useHistory();
         const jwt = localStorage.getItem("token");
@@ -54,8 +54,14 @@ const Dashboard = () => {
     }, [sensors]);
 
     const handleSensorChange = (option) => {
-        if (option)
-            setSelectedSensor(option);
+        if (option) {
+            sensors.forEach((sensor) => {
+                if (option.value === sensor._id) {
+                    setSelectedSensor(sensor);
+                }
+            });
+        }
+
     }
 
     const handleAddSensorBtnClick = () => {
