@@ -5,6 +5,8 @@ import "./assets/styles/main.scss"
 import Header from "./components/Header"
 import routes from "./routes/routes";
 import Footer from "./components/Footer";
+import './App.css';
+import SignInOutContainer from "./containers";
 
 function App() {
   return (
@@ -30,8 +32,8 @@ function App() {
             </BrowserRouter>
             <Footer/>
         </div>
+        <SignInOutContainer/>
     </Container>
-
   );
 }
 
