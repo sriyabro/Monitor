@@ -11,12 +11,14 @@
   "keywords": [],
   "dependencies": {
     "@vonage/server-sdk": "^2.10.10",
+    "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.2",
-    "nodemailer": "^6.6.2"
+    "nodemailer": "^6.6.2",
+    "sweetalert2": "^11.0.18"
   }
 }

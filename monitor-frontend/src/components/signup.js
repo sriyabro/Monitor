@@ -6,7 +6,13 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import { FormHelperText } from '@material-ui/core'
 import * as Yup from 'yup'
+import Axios from 'axios';
+import Swal from 'sweetalert2';
+
+
 const Signup = () => {
+
+    const url = 'http://localhost:6500/users/add';
     const paperStyle = { padding: 20, width: 300, margin: "0 auto" }
     const headerStyle = { margin: 0 }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
@@ -14,25 +20,54 @@ const Signup = () => {
     const initialValues = {
         name: '',
         email: '',
+        contact:'',
         password: '',
         confirmPassword: '',
-        termsAndConditions: false
     }
     const validationSchema = Yup.object().shape({
         name: Yup.string().min(3, "It's too short").required("Required"),
         email: Yup.string().email("Enter valid email").required("Required"),
-        password: Yup.string().min(8, "Password minimum length should be 8").required("Required"),
+        contact: Yup.string().min(10,"Enter valid contact").max(10,"Enter valid contact").required("Required"),
+        password: Yup.string().min(2, "Password minimum length should be 8").required("Required"),
         confirmPassword: Yup.string().oneOf([Yup.ref('password')], "Password not matched").required("Required"),
-        termsAndConditions: Yup.string().oneOf(["true"], "Accept terms & conditions")
     })
-    const onSubmit = (values, props) => {
-        console.log(values)
-        console.log(props)
-        setTimeout(() => {
+    const onSubmit = async(values , props) => {
+        Axios.post(url,{
 
-            props.resetForm()
-            props.setSubmitting(false)
-        }, 2000)
+            user_Name : values.name, 
+            user_Contact: values.contact, 
+            user_Email: values.email, 
+            user_Password : values.password
+
+        })
+        .then((res)=>{
+            console.log(res.data)
+            if(res.data === "User Added!"){
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Registered In Successfully!',
+                })
+                //history.push('/login');       
+        
+            }
+
+            else if(res.data === "Already Registered"){
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Already Registered',
+                    text: 'Use different email for create new account',
+                  })
+            }
+            
+        })
+        .catch((e) => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+              })
+          });
+        props.resetForm()
     }
     return (
         <Grid>
@@ -52,17 +87,14 @@ const Signup = () => {
                                    placeholder="Enter your name" helperText={<ErrorMessage name="name" />} />
                             <Field as={TextField} fullWidth name="email" label='Email'
                                    placeholder="Enter your email" helperText={<ErrorMessage name="email" />} />
+                            <Field as={TextField} fullWidth name="contact" label='Contact Number'
+                                   placeholder="Enter your contact number" helperText={<ErrorMessage name="contact" />} />
                             <Field as={TextField} fullWidth name='password' type="password"
                                    label='Password' placeholder="Enter your password"
                                    helperText={<ErrorMessage name="password" />} />
                             <Field as={TextField} fullWidth name="confirmPassword" type="password"
                                    label='Confirm Password' placeholder="Confirm your password"
                                    helperText={<ErrorMessage name="confirmPassword" />} />
-                            <FormControlLabel
-                                control={<Field as={Checkbox} name="termsAndConditions" />}
-                                label="I accept the terms and conditions."
-                            />
-                            <FormHelperText><ErrorMessage name="termsAndConditions" /></FormHelperText>
                             <Button type='submit' variant='contained' disabled={props.isSubmitting}
                                     color='primary'>{props.isSubmitting ? "Loading" : "Sign up"}</Button>
 
