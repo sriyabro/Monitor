@@ -1,15 +1,34 @@
 import React from "react";
+import {Container} from "react-bootstrap";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import "./assets/styles/main.scss"
+import routes from "./routes/routes";
+import Footer from "./components/Footer";
 import './App.css';
-import SignInOutContainer from "./containers";
 
 function App() {
   return (
-      <div className="App">
+    <Container fluid={true}>
+        <div>
+            <BrowserRouter>
+                <Switch>
+                    {routes.map((route, index) =>
+                        <Route
+                            key={index}
+                            path={route.path}
+                            exact={route.exact}
+                            render={(routeProps) => {
+                                // if (route.protected)
+                                //     return <AuthRoute><route.component  {...routeProps} /></AuthRoute>;
 
-          <SignInOutContainer/>
-      </div>
-
+                                return <route.component  {...routeProps} />
+                            }}
+                        />)}
+                </Switch>
+            </BrowserRouter>
+            <Footer/>
+        </div>
+    </Container>
   );
 }
 

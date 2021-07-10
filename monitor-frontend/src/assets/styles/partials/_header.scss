@@ -1,0 +1,13 @@
+.header {
+  font-size: 1em;
+  border-bottom: 1px solid gray;
+  z-index: 10;
+
+  .user {
+    cursor: pointer;
+  }
+
+  .logout {
+    vertical-align: center;
+  }
+}
