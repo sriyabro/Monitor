@@ -8,13 +8,13 @@ import * as Yup from 'yup'
 
 const Login = ({ handleChange }) => {
 
-    const paperStyle = { padding: 20, height: '73vh', width: 300, margin: "0 auto" }
+    const paperStyle = { padding: 20, height: '60vh', width: 300, margin: "0 auto" }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
     const btn = { margin: '8px 0' }
     const initialValues = {
         username: '',
         password: '',
-        remember: false
+        // remember: false
     }
     const validationSchema = Yup.object().shape({
         username: Yup.string().email('please enter valid email').required("Required"),
@@ -45,7 +45,7 @@ const Login = ({ handleChange }) => {
                             <Field as={TextField} label='Password' name="password"
                                    placeholder='Enter password' type='password' fullWidth required
                                    helperText={<ErrorMessage name="password" />} />
-                            <Field as={FormControlLabel}
+                            {/* <Field as={FormControlLabel}
                                    name='remember'
                                    control={
                                        <Checkbox
@@ -53,18 +53,18 @@ const Login = ({ handleChange }) => {
                                        />
                                    }
                                    label="Remember me"
-                            />
+                            /> */}
                             <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
                                     style={btn} fullWidth>{props.isSubmitting ? "Loading" : "Sign in"}</Button>
 
                         </Form>
                     )}
                 </Formik>
-                <Typography >
+                {/* <Typography >
                     <Link href="#" >
                         Forgot password ?
                     </Link>
-                </Typography>
+                </Typography> */}
                 <Typography > Do you have an account ?
                     <Link href="#" onClick={() => handleChange("event", 1)} >
                         Sign Up
