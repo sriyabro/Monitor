@@ -8,24 +8,18 @@ router.route('/add').post(async (req,res) => {
 
     try {
 
-        //Check Current Sensor
-        let sensor = await Sensor.findOne({ sensor_name: req.body.sensor_name});
-        if(sensor) return res.status(400).send('Sensor Existing')
-
-        let userOb = await User.findById(req.body.sensor_user);
+        let userOb = await User.findById(req.body.user);
     
         //Create New User
         const sensor_user = userOb;
-        const sensor_name = req.body.sensor_name;
-        const sensor_threshold = req.body.sensor_threshold;
-        const sensor_readings = req.body.sensor_readings; 
+        const sensor_name = req.body.name;
+        const sensor_threshold = req.body.threshold;
 
         const newSensor = new Sensor({
 
             sensor_user, 
             sensor_name,
             sensor_threshold,
-            sensor_readings, 
         });
     
         await newSensor.save();

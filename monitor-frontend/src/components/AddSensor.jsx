@@ -3,6 +3,10 @@ import {Alert, Button, Col, FormControl, Modal, Row} from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import Select from "react-select";
 import {AlertTriangle, Thermometer} from "react-feather";
+import jwtDecode from "jwt-decode";
+import Axios from 'axios';
+import Swal from 'sweetalert2';
+import {useHistory} from 'react-router-dom';
 
 const unitOptions = [
     {label: 'C', value: 'C'},
@@ -12,27 +16,60 @@ const unitOptions = [
 ]
 
 function AddSensor(props) {
+
+    const history = useHistory();
+    const jwt = localStorage.getItem("token");
+    let userID = jwtDecode(jwt)._id;
+
+    const url = "http://localhost:6500/sensors/add";
     const [sensorName, setSensorName] = useState(null);
     const [sensorThreshold, setSensorThreshold] = useState(null);
     const [sensorUnit, setSensorUnit] = useState(null);
     const [formInvalid, setFormInvalid] = useState(false);
 
-    const handleAddNewSensor = () => {
+    const handleAddNewSensor = (e) => {
+        e.preventDefault();
         if (!sensorName || !sensorThreshold || sensorName === '' || sensorThreshold === '' || !sensorUnit ) {
             setFormInvalid(true);
             return;
+
+
         }
         setFormInvalid(false);
         let newSensor = {
+            user: userID,
             name: sensorName,
             threshold: sensorThreshold,
-            unit: sensorUnit
+            //unit: sensorUnit
         }
-        props.handleAddNewSensor(newSensor);
 
+        Axios.post(url,newSensor)
+        .then(res => {
+            console.log(res.data)
+            if (res.data === "Sensor Added!") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sensor Added!',
+                  })
+                handleClose();
+                history.push('/dashboard');
+
+            } 
+        })
+        .catch((e)=> {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+
+              })
+        })
         setSensorName(null);
         setSensorThreshold(null);
         setSensorUnit(null);
+
+
+
     }
 
     const handleSensorNameChange = (e) => setSensorName(e.target.value);
