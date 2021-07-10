@@ -8,6 +8,7 @@ import {customStyles} from "../constants/constants";
 import AddSensor from "./AddSensor";
 import Header from "./Header";
 import jwtDecode from "jwt-decode";
+import Axios from 'axios';
 
 function Dashboard() {
         const [selectorOptions, setSelectorOptions] = useState(null);
@@ -16,12 +17,24 @@ function Dashboard() {
         const [sensors, setSensors] = useState([]);
         const history = useHistory();
         const jwt = localStorage.getItem("token");
-        let userID;
-        let userName;
-        let userEmail;
+        let userID = jwtDecode(jwt)._id;
 
+        const getSensors = async () => {
+
+            try {
+              const data = await Axios.get(
+                "http://localhost:6500/sensors/" + userID
+              );
+              console.log(data.data);
+              setSensors(data.data);
+     
+            } catch (e) {
+              console.log(e);
+            }
+          };
 
     useEffect(() => {
+        getSensors();
         if (!sensors) {
             return;
         }
@@ -34,7 +47,7 @@ function Dashboard() {
         })
         if (!options) return;
         setSelectorOptions(options);
-    }, [sensors]);
+    }, []);
 
     const handleSensorChange = (option) => {
         if (option)
