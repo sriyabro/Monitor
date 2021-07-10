@@ -1,13 +1,13 @@
 const router = require('express').Router();
 let User = require('../models/users.model');
- const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
  const jwt = require('jsonwebtoken');
 
- require('dotenv').config();
+require('dotenv').config();
 
 
 //add user
-router.route('/add').post(async (req,res) => {
+router.route('/add').post( async(req,res) => {
 
     try {
         //Check Current Users
@@ -15,16 +15,14 @@ router.route('/add').post(async (req,res) => {
         if(user) return res.status(400).send('Already Registered')
     
         //Create New User
-        const user_Fname = req.body.user_Fname;
-        const user_Lname = req.body.user_Lname;
+        const user_Name = req.body.user_Name;
         const user_Contact = req.body.user_Contact; 
         const user_Email = req.body.user_Email;
         const user_Password = req.body.user_Password;
 
         const newUser = new User({
 
-            user_Fname, 
-            user_Lname,
+            user_Name, 
             user_Contact, 
             user_Email, 
             user_Password 
