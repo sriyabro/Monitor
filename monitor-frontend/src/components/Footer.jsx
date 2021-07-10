@@ -2,7 +2,7 @@ import React from 'react'
 import {Col, Row} from "react-bootstrap"
 import {GitHub} from "react-feather";
 
-function Footer () {
+const Footer = () => {
     return(
         <Row className="footer py-2">
             <Col xs={12} className="">

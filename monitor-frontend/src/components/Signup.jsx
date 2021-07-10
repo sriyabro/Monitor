@@ -1,7 +1,7 @@
 import React from 'react'
-import { Grid, Paper, Avatar, Typography, TextField, Button } from '@material-ui/core'
+import {Avatar, Button, Grid, Paper, TextField, Typography} from '@material-ui/core'
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
-import { Formik, Field, Form, ErrorMessage } from 'formik'
+import {ErrorMessage, Field, Form, Formik} from 'formik'
 import * as Yup from 'yup'
 import Axios from 'axios';
 import Swal from 'sweetalert2';
@@ -56,7 +56,7 @@ const Signup = () => {
             }
             
         })
-        .catch((e) => {
+        .catch(() => {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',

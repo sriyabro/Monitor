@@ -14,7 +14,7 @@ const unitOptions = [
     {label: 'Km/h', value: 'Km/h'},
 ]
 
-function AddSensor(props) {
+const AddSensor = (props) => {
 
     const jwt = localStorage.getItem("token");
     let userID = jwtDecode(jwt)._id;
@@ -52,7 +52,7 @@ function AddSensor(props) {
                 handleClose();
             } 
         })
-        .catch((e)=> {
+        .catch(()=> {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
