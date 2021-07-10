@@ -6,7 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Login from '../components/login'
 import Signup from '../components/signup'
-const SignInOutContainer=()=>{
+
+const SignInOutContainer = () => {
     const [value,setValue]=useState(0)
     const paperStyle={width:300,margin:"20px auto"}
     const handleChange = (event, newValue) => {

@@ -6,6 +6,7 @@ import {Button, Col, Row} from "react-bootstrap";
 import {Activity, Plus} from 'react-feather';
 import {customStyles} from "../constants/constants";
 import AddSensor from "./AddSensor";
+import Header from "./Header";
 
 function Dashboard() {
         const [selectorOptions, setSelectorOptions] = useState(null);
@@ -72,6 +73,7 @@ function Dashboard() {
 
     return (
         <React.Fragment>
+            <Header/>
         <AddSensor showModal={showAddSensorModal}
                    handleClose={handleAddSensorModalClose}
                    handleAddNewSensor={handleAddNewSensor}

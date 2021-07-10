@@ -1,5 +1,6 @@
 import Dashboard from '../components/Dashboard';
 import AlertHistory from '../components/AlertHistory';
+import SignInOutContainer from "../containers/index";
 
 const routes = [
     {
@@ -19,14 +20,14 @@ const routes = [
         protected: true
 
     },
-    // {
-    //     path: '/login',
-    //     exact: true,
-    //     component: Login,
-    //     name: 'Login Page',
-    //     protected: false
-    //
-    // },
+    {
+        path: '/signin',
+        exact: true,
+        component: SignInOutContainer,
+        name: 'SignUp',
+        protected: false
+
+    },
     // {
     //     path: '/register',
     //     exact: true,
@@ -34,7 +35,7 @@ const routes = [
     //     name: 'Register Page',
     //     protected: false
     //
-    // ]
+    // }
 ]
 
 export default routes;

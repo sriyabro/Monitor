@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import {Button, Col, Row} from "react-bootstrap";
 import {BarChart2, ChevronLeft} from "react-feather";
 import {useHistory} from "react-router-dom";
+import Header from "./Header";
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -71,6 +72,7 @@ function AlertHistory() {
 
     return (
         <div className="alert-history px-2 bg-white rounded" >
+            <Header/>
             <Row className="sensors p-3" >
                 <Col xs={12} md={6}><h3>Temp Sensor</h3><h6 className="m-0">Threshold value : <span className="text-danger">30</span></h6></Col>
                 <Col xs={12} md={6} className="text-right p-0">
