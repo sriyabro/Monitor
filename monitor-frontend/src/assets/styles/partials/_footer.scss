@@ -14,3 +14,9 @@
     text-decoration: none;
   }
 }
+
+@media (max-height: 992px) {
+  .footer {
+    font-size: .8em;
+  }
+}

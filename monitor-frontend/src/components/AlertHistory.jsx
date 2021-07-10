@@ -42,6 +42,17 @@ const rows = [
     createData("2021 - 07 - 09", 262, 16.0),
     createData("2021 - 07 - 09", 305, 3.7),
     createData("2021 - 07 - 09", 356, 16.0),
+    createData("2021 - 07 - 09", 237, 9.0),
+    createData("2021 - 07 - 09", 262, 16.0),
+    createData("2021 - 07 - 09", 305, 3.7),
+    createData("2021 - 07 - 09", 356, 16.0),
+    createData("2021 - 07 - 09", 262, 16.0),
+    createData("2021 - 07 - 09", 305, 3.7),
+    createData("2021 - 07 - 09", 356, 16.0),
+    createData("2021 - 07 - 09", 237, 9.0),
+    createData("2021 - 07 - 09", 262, 16.0),
+    createData("2021 - 07 - 09", 305, 3.7),
+    createData("2021 - 07 - 09", 356, 16.0),
 ];
 
 const useStyles = makeStyles({
@@ -59,7 +70,7 @@ function AlertHistory() {
     }
 
     return (
-        <div className="px-2 bg-white rounded" >
+        <div className="alert-history px-2 bg-white rounded" >
             <Row className="sensors p-3" >
                 <Col xs={12} md={6}><h3>Temp Sensor</h3><h6 className="m-0">Threshold value : <span className="text-danger">30</span></h6></Col>
                 <Col xs={12} md={6} className="text-right p-0">
@@ -69,7 +80,7 @@ function AlertHistory() {
                     </Button>
                 </Col>
             </Row>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} className="alert-table">
                 <Tablenew className={classes.table} aria-label="customized table">
                     <TableHead>
                         <TableRow>

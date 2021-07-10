@@ -77,7 +77,7 @@ function Dashboard() {
                    handleAddNewSensor={handleAddNewSensor}
         />
         <Row className="sensors p-3 mb-5" >
-            <Col xs={12} md={4}>
+            <Col xs={12} lg={4}>
                 <Select className="select-control" classNamePrefix="select-control"
                         isSearchable
                         isClearable
@@ -88,19 +88,19 @@ function Dashboard() {
                         value={selectorOptions?.value}
                 />
             </Col>
-            <Col xs={12} md={4} className="px-0">
+            <Col xs={12} sm={5} lg={4} className="px-0">
                 <Button className="new-sensor" onClick={handleAddSensorBtnClick}>
                     <Plus/> &nbsp; Add New Sensor
                 </Button>
 
             </Col>
-           <Col xs={12} md={4} className="text-right">
+           <Col xs={12} sm={7} lg={4} className="text-right">
                <Button className="history text-danger border-danger" onClick={handleAlertHistoryButton}>
                    <Activity/> &nbsp; View Sensor Alert History
                </Button>
            </Col>
 
-            <Col xs={12} className="pt-5 chart">
+            <Col xs={12} className="pt-3 chart">
                 <Line data={data}/>
             </Col>
         </Row>
