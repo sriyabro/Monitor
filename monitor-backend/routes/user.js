@@ -45,11 +45,11 @@ router.route('/login').post(async (req,res) => {
 
     //Check Current Users
     let user = await User.findOne({ user_Email: req.body.user_Email});
-    if(!user) return res.status(400).send('Invalid email')
+    if(!user) return res.status(400).json({msg:'Invalid email'})
 
     //check password
     const validPassword = await bcrypt.compare(req.body.user_Password, user.user_Password)
-    if(!validPassword) res.status(400).send('Invalid Password')
+    if(!validPassword) res.status(400).json({msg:'Invalid Password'})
 
     //Set Token
     const token = jwt.sign({_id : user._id, user_Email: user.user_Email , user_Name:user.user_Name},  process.env.jwtKey)

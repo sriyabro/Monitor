@@ -1,10 +1,7 @@
 import React from 'react'
 import { Grid, Paper, Avatar, Typography, TextField, Button } from '@material-ui/core'
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import { Formik, Field, Form, ErrorMessage } from 'formik'
-import { FormHelperText } from '@material-ui/core'
 import * as Yup from 'yup'
 import Axios from 'axios';
 import Swal from 'sweetalert2';
@@ -16,7 +13,7 @@ const Signup = () => {
     const paperStyle = { padding: 20, width: 300, margin: "0 auto" }
     const headerStyle = { margin: 0 }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
-    const marginTop = { marginTop: 5 }
+    // const marginTop = { marginTop: 5 }
     const initialValues = {
         name: '',
         email: '',
@@ -47,7 +44,6 @@ const Signup = () => {
                   icon: 'success',
                   title: 'Registered In Successfully!',
                 })
-                //history.push('/login');       
         
             }
 
