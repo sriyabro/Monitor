@@ -7,15 +7,18 @@ import {Activity, Plus} from 'react-feather';
 import {customStyles} from "../constants/constants";
 import AddSensor from "./AddSensor";
 import Header from "./Header";
+import jwtDecode from "jwt-decode";
 
 function Dashboard() {
         const [selectorOptions, setSelectorOptions] = useState(null);
         const [selectedSensor, setSelectedSensor] = useState("No sensor selected");
         const [showAddSensorModal, setShowAddSensorModal] = useState(false);
-
         const [sensors, setSensors] = useState([]);
-
-    const history = useHistory();
+        const history = useHistory();
+        const jwt = localStorage.getItem("token");
+        let userID;
+        let userName;
+        let userEmail;
 
 
     useEffect(() => {

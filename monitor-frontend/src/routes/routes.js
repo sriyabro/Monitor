@@ -4,7 +4,7 @@ import SignInOutContainer from "../containers/index";
 
 const routes = [
     {
-        path: '/',
+        path: '/dashboard',
         exact: true,
         component: Dashboard,
         name: 'Dashboard',
@@ -21,7 +21,7 @@ const routes = [
 
     },
     {
-        path: '/signin',
+        path: '/',
         exact: true,
         component: SignInOutContainer,
         name: 'SignUp',
