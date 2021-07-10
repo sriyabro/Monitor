@@ -81,8 +81,8 @@ function AlertHistory() {
                 </Col>
             </Row>
             <TableContainer component={Paper} className="alert-table">
-                <Tablenew className={classes.table} aria-label="customized table">
-                    <TableHead>
+                <Tablenew stickyHeader className={classes.table} aria-label="customized table">
+                    <TableHead >
                         <TableRow>
                             <StyledTableCell>Date</StyledTableCell>
                             <StyledTableCell>Time</StyledTableCell>
