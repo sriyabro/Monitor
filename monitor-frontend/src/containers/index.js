@@ -8,8 +8,8 @@ import Login from '../components/login'
 import Signup from '../components/signup'
 
 const SignInOutContainer = () => {
-    const [value,setValue]=useState(0)
-    const paperStyle={width:300,margin:"20px auto"}
+    const [value,setValue] = useState(0)
+    const paperStyle = {width:300,margin:"20px auto"}
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -33,7 +33,6 @@ const SignInOutContainer = () => {
         );
     }
 
-
         return (
             <Paper elevation={20} style={paperStyle}>
                 <Tabs
@@ -54,8 +53,6 @@ const SignInOutContainer = () => {
                     <Signup/>
                 </TabPanel>
             </Paper>
-
-
     )
 }
 

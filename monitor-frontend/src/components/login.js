@@ -24,9 +24,9 @@ const Login = ({ handleChange }) => {
     })
     const onSubmit = (values, props) => {
         //props,isSubmitting(true)
-        let loginData={
+        let loginData = {
             user_Email: values.email,
-            user_Password:values.password,
+            user_Password: values.password,
         }
 
         Axios.post(url, loginData)
@@ -49,6 +49,7 @@ const Login = ({ handleChange }) => {
         });
         props.resetForm()
     }
+
     return (
         <Grid>
             <Paper style={paperStyle}>
