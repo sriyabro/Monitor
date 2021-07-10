@@ -12,7 +12,7 @@ import Axios from 'axios';
 
 function Dashboard() {
         const [selectorOptions, setSelectorOptions] = useState(null);
-        const [selectedSensor, setSelectedSensor] = useState("No sensor selected");
+        const [selectedSensor, setSelectedSensor] = useState({label: "No Sensor Selected"});
         const [showAddSensorModal, setShowAddSensorModal] = useState(false);
         const [sensors, setSensors] = useState([]);
         const history = useHistory();
@@ -25,7 +25,6 @@ function Dashboard() {
               const data = await Axios.get(
                 "http://localhost:6500/sensors/" + userID
               );
-              console.log(data.data);
               setSensors(data.data);
      
             } catch (e) {
@@ -33,25 +32,30 @@ function Dashboard() {
             }
           };
 
+        useEffect(() => {
+            getSensors();
+        }, [])
+
     useEffect(() => {
-        getSensors();
         if (!sensors) {
             return;
         }
         let options = [];
         sensors.forEach((sensor) => {
             options?.push({
-                label: sensor.name,
-                value: sensor.name
+                label: sensor.sensor_name,
+                value: sensor._id
             })
+
+            console.log(sensor);
         })
         if (!options) return;
         setSelectorOptions(options);
-    }, []);
+    }, [sensors]);
 
     const handleSensorChange = (option) => {
         if (option)
-            setSelectedSensor(option.value);
+            setSelectedSensor(option);
     }
 
     const handleAddSensorBtnClick = () => {
@@ -62,11 +66,8 @@ function Dashboard() {
         setShowAddSensorModal(false);
     }
 
-    const handleAddNewSensor = (newSensor) => {
-        let sensorlist = sensors.slice();
-        sensorlist.push({name: newSensor.name});
-        setSensors(sensorlist);
-        handleAddSensorModalClose();
+    const handleAddNewSensor = () => {
+       getSensors();
     }
 
     const handleAlertHistoryButton = () => {
@@ -77,8 +78,8 @@ function Dashboard() {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
         datasets: [
             {
-                label: selectedSensor,
-                data: [100, 53, 85, 41, 44, 65],
+                label: selectedSensor.label,
+                data: [250, 150, 55, 1, 223, 65],
                 fill: true,
                 backgroundColor: "rgba(75,192,192,0.2)",
                 borderColor: "rgba(75,192,192,1)"

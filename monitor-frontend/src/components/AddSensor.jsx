@@ -2,11 +2,10 @@ import React, {useState} from 'react'
 import {Alert, Button, Col, FormControl, Modal, Row} from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import Select from "react-select";
-import {AlertTriangle, Thermometer} from "react-feather";
+import {AlertTriangle} from "react-feather";
 import jwtDecode from "jwt-decode";
 import Axios from 'axios';
 import Swal from 'sweetalert2';
-import {useHistory} from 'react-router-dom';
 
 const unitOptions = [
     {label: 'C', value: 'C'},
@@ -17,7 +16,6 @@ const unitOptions = [
 
 function AddSensor(props) {
 
-    const history = useHistory();
     const jwt = localStorage.getItem("token");
     let userID = jwtDecode(jwt)._id;
 
@@ -32,14 +30,13 @@ function AddSensor(props) {
         if (!sensorName || !sensorThreshold || sensorName === '' || sensorThreshold === '' || !sensorUnit ) {
             setFormInvalid(true);
             return;
-
-
         }
         setFormInvalid(false);
+
         let newSensor = {
-            user: userID,
-            name: sensorName,
-            threshold: sensorThreshold,
+            sensor_user: userID,
+            sensor_name: sensorName,
+            sensor_threshold: sensorThreshold,
             //unit: sensorUnit
         }
 
@@ -51,9 +48,8 @@ function AddSensor(props) {
                     icon: 'success',
                     title: 'Sensor Added!',
                   })
+                props.handleAddNewSensor();
                 handleClose();
-                history.push('/dashboard');
-
             } 
         })
         .catch((e)=> {
@@ -61,15 +57,11 @@ function AddSensor(props) {
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Something went wrong!',
-
               })
         })
         setSensorName(null);
         setSensorThreshold(null);
         setSensorUnit(null);
-
-
-
     }
 
     const handleSensorNameChange = (e) => setSensorName(e.target.value);

@@ -67,7 +67,7 @@ function AlertHistory() {
     const history = useHistory();
 
     const handleBackButtonClicked = () => {
-        history.push('/');
+        history.push('/dashboard');
     }
 
     return (
