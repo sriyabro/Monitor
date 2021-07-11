@@ -46,8 +46,6 @@ const Dashboard = () => {
                 label: sensor.sensor_name,
                 value: sensor._id
             })
-
-            console.log(sensor);
         })
         if (!options) return;
         setSelectorOptions(options);
@@ -61,7 +59,6 @@ const Dashboard = () => {
                 }
             });
         }
-
     }
 
     const handleAddSensorBtnClick = () => {
