@@ -24,7 +24,7 @@ const Signup = () => {
     const validationSchema = Yup.object().shape({
         name: Yup.string().min(3, "It's too short").required("Required"),
         email: Yup.string().email("Enter valid email").required("Required"),
-        contact: Yup.string().min(10,"Enter valid contact").max(10,"Enter valid contact").required("Required"),
+        contact: Yup.string().min(10,"Enter valid contact").max(12,"Enter valid contact").required("Required"),
         password: Yup.string().min(2, "Password minimum length should be 8").required("Required"),
         confirmPassword: Yup.string().oneOf([Yup.ref('password')], "Password not matched").required("Required"),
     })
@@ -93,7 +93,6 @@ const Signup = () => {
                                    helperText={<ErrorMessage name="confirmPassword" />} />
                             <Button type='submit' variant='contained' disabled={props.isSubmitting}
                                     color='primary'>{props.isSubmitting ? "Loading" : "Sign up"}</Button>
-
                         </Form>
                     )}
                 </Formik>

@@ -37,15 +37,13 @@ router.route('/data').post(async(req,res) => {
     //let userOb = await User.findById(req.params.id)
     let sensor = await Sensor.findOne({_id: req.body.sensor_id}).populate('sensor_user');
 
-    let value = req.body.values;
-
     sensor.sensor_readings.push({
-        values : value,
-        date_time : Date()
+        values : req.body.values,
+        date_time : req.body.date_time
     })
 
-    if(sensor.sensor_threshold <= value){
-        alertUser(sensor, value);
+    if(sensor.sensor_threshold <= req.body.values){
+        alertUser(sensor, req.body.values);
     }
 
     await sensor.save()
@@ -62,11 +60,21 @@ router.route('/').get((req,res) => {
     .catch(err => res.status(400).json('Error: '+ err));
 });
 
-//get all sensor related to a specific user
+//get sensor by id
 router.route('/:id').get(async(req,res) => {
-
     try {
-        
+        let sensors = await Sensor.findById(req.params.id);
+        res.json(sensors)
+
+    } catch (error) {
+        res.status(400).json('Error: '+ error)
+    }
+
+});
+
+//get all sensor related to a specific user
+router.route('/user/:id').get(async(req,res) => {
+    try {
         let userOb = await User.findById(req.params.id);
         let sensors = await Sensor.find({ sensor_user: userOb});
         res.json(sensors)

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {makeStyles, withStyles} from '@material-ui/core/styles';
 import Tablenew from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,6 +11,7 @@ import {Button, Col, Row} from "react-bootstrap";
 import {BarChart2, ChevronLeft} from "react-feather";
 import {useHistory} from "react-router-dom";
 import Header from "./Header";
+import Axios from "axios";
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -33,29 +34,6 @@ const StyledTableRow = withStyles((theme) => ({
     },
 }))(TableRow);
 
-function createData(date, time, value) {
-    return { date, time, value };
-}
-
-const rows = [
-    createData("2021 - 07 - 09", 159, 6.0 ),
-    createData("2021 - 07 - 09", 237, 9.0),
-    createData("2021 - 07 - 09", 262, 16.0),
-    createData("2021 - 07 - 09", 305, 3.7),
-    createData("2021 - 07 - 09", 356, 16.0),
-    createData("2021 - 07 - 09", 237, 9.0),
-    createData("2021 - 07 - 09", 262, 16.0),
-    createData("2021 - 07 - 09", 305, 3.7),
-    createData("2021 - 07 - 09", 356, 16.0),
-    createData("2021 - 07 - 09", 262, 16.0),
-    createData("2021 - 07 - 09", 305, 3.7),
-    createData("2021 - 07 - 09", 356, 16.0),
-    createData("2021 - 07 - 09", 237, 9.0),
-    createData("2021 - 07 - 09", 262, 16.0),
-    createData("2021 - 07 - 09", 305, 3.7),
-    createData("2021 - 07 - 09", 356, 16.0),
-];
-
 const useStyles = makeStyles({
     table: {
         minWidth: 500,
@@ -66,6 +44,25 @@ const AlertHistory = () => {
     const classes = useStyles();
     const history = useHistory();
 
+    const [selectedSensor, setSelectedSensor] = useState([]);
+
+    const getSelectedSensor = async () => {
+        const sensorID = localStorage.getItem("selectedSensorId");
+        try {
+            const data = await Axios.get(
+                "http://localhost:6500/sensors/" + sensorID
+            );
+            setSelectedSensor(data.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        getSelectedSensor();
+    }, []);
+
+
     const handleBackButtonClicked = () => {
         history.push('/dashboard');
     }
@@ -75,7 +72,11 @@ const AlertHistory = () => {
             <Header/>
         <div className="alert-history bg-white rounded" >
             <Row className="sensors p-3" >
-                <Col xs={12} md={6}><h3>Temp Sensor</h3><h6 className="m-0">Threshold value : <span className="text-danger">30</span></h6></Col>
+                <Col xs={12} md={6}>
+                    <h3>{selectedSensor.sensor_name}</h3>
+                    <h6 className="m-0">Threshold value :
+                        <span className="text-danger"> {selectedSensor.sensor_threshold}</span></h6>
+                </Col>
                 <Col xs={12} md={6} className="text-right">
 
                     <Button className="history text-danger border-danger" onClick={handleBackButtonClicked}>
@@ -93,14 +94,19 @@ const AlertHistory = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
-                            <StyledTableRow key={row.date}>
-                                <StyledTableCell component="th" scope="row">
-                                    {row.date}
+                        {selectedSensor.sensor_readings && selectedSensor.sensor_readings.map((sensor) => (
+                            sensor.values >= selectedSensor.sensor_threshold ?
+                            (<StyledTableRow key={sensor.date_time}>
+                                <StyledTableCell component="th" scope="row" >
+                                    {sensor.date_time.split(' ')[0]}
                                 </StyledTableCell>
-                                <StyledTableCell >{row.time}</StyledTableCell>
-                                <StyledTableCell >{row.value}</StyledTableCell>
-                            </StyledTableRow>
+                                <StyledTableCell >
+                                    {sensor.date_time.split(' ')[1]}
+                                </StyledTableCell>
+                                <StyledTableCell >
+                                    {sensor.values}
+                                </StyledTableCell>
+                            </StyledTableRow>) : <StyledTableRow/>
                         ))}
                     </TableBody>
                 </Tablenew>
