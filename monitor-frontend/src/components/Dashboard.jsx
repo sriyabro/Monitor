@@ -56,6 +56,8 @@ const Dashboard = () => {
             sensors.forEach((sensor) => {
                 if (option.value === sensor._id) {
                     setSelectedSensor(sensor);
+                    localStorage.setItem("selectedSensor", sensor.id);
+                    console.log("LS: ",localStorage.getItem("selectedSensor"));
                 }
             });
         }
