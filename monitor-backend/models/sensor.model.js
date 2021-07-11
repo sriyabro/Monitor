@@ -9,7 +9,7 @@ const sensorsSchema = new Schema({
     sensor_threshold:{type:String , required:true},
     sensor_readings: [{
         values:{type:String},
-        date_time:{type:Date},
+        date_time:{type:String},
     }]
 
 },  {

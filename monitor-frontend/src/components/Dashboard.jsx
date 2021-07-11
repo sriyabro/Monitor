@@ -15,7 +15,8 @@ const Dashboard = () => {
         const [showAddSensorModal, setShowAddSensorModal] = useState(false);
         const [selectedSensor, setSelectedSensor] =useState(null);
         const [sensors, setSensors] = useState([]);
-        const history = useHistory();
+
+    const history = useHistory();
         const jwt = localStorage.getItem("token");
         let userID = jwtDecode(jwt)._id;
 
@@ -23,10 +24,10 @@ const Dashboard = () => {
 
             try {
               const data = await Axios.get(
-                "http://localhost:6500/sensors/" + userID
+                "http://localhost:6500/sensors/user/" + userID
               );
               setSensors(data.data);
-     
+
             } catch (e) {
               console.log(e);
             }
@@ -34,6 +35,7 @@ const Dashboard = () => {
 
         useEffect(() => {
             getSensors();
+            // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [])
 
     useEffect(() => {
@@ -56,8 +58,7 @@ const Dashboard = () => {
             sensors.forEach((sensor) => {
                 if (option.value === sensor._id) {
                     setSelectedSensor(sensor);
-                    localStorage.setItem("selectedSensor", sensor.id);
-                    console.log("LS: ",localStorage.getItem("selectedSensor"));
+                    localStorage.setItem("selectedSensorId", sensor._id);
                 }
             });
         }

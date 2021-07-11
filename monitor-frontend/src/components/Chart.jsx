@@ -20,7 +20,7 @@ const Chart = ({sensor}) => {
        setSensorValues(sensor_values);
    }, [sensor]);
 
-    const down = (ctx, value) => ctx.data > 40 ? value : undefined;
+    // const down = (ctx, value) => ctx.p0.parsed.y > ctx.p1.parsed.y ? value : undefined;
 
     const data = {
         labels: sensorTimes,
@@ -30,10 +30,10 @@ const Chart = ({sensor}) => {
                 data: sensorValues,
                 fill: true,
                 backgroundColor: "rgba(75,192,192,0.2)",
-                borderColor: ctx => {
-                    down(ctx, 'rgb(0,75,75)');
-                    console.log(ctx);
-                }
+                borderColor: "rgba(75,192,192,1)",
+                // borderColor: ctx => {
+                //     down(ctx, 'rgb(0,75,75)');
+                // }
             }
         ]
     };
