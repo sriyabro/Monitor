@@ -71,11 +71,12 @@ const AlertHistory = () => {
     }
 
     return (
-        <div className="alert-history px-2 bg-white rounded" >
+        <React.Fragment>
             <Header/>
+        <div className="alert-history bg-white rounded" >
             <Row className="sensors p-3" >
                 <Col xs={12} md={6}><h3>Temp Sensor</h3><h6 className="m-0">Threshold value : <span className="text-danger">30</span></h6></Col>
-                <Col xs={12} md={6} className="text-right p-0">
+                <Col xs={12} md={6} className="text-right">
 
                     <Button className="history text-danger border-danger" onClick={handleBackButtonClicked}>
                        <ChevronLeft/> &nbsp; Back to Sensor Readings &nbsp; <BarChart2/>
@@ -105,6 +106,7 @@ const AlertHistory = () => {
                 </Tablenew>
             </TableContainer>
         </div>
+        </React.Fragment>
     );
 }
 

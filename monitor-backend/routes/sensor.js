@@ -41,7 +41,7 @@ router.route('/data').post(async(req,res) => {
 
     sensor.sensor_readings.push({
         values : value,
-        date_time : Date(req.body.date_time)
+        date_time : Date()
     })
 
     if(sensor.sensor_threshold <= value){
