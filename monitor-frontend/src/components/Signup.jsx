@@ -13,6 +13,7 @@ const Signup = () => {
     const paperStyle = { padding: 20, width: 300, margin: "0 auto" }
     const headerStyle = { margin: 0 }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
+    const btn = { margin: '8px auto' }
     // const marginTop = { marginTop: 5 }
     const initialValues = {
         name: '',
@@ -92,7 +93,7 @@ const Signup = () => {
                                    label='Confirm Password' placeholder="Confirm your password"
                                    helperText={<ErrorMessage name="confirmPassword" />} />
                             <Button type='submit' variant='contained' disabled={props.isSubmitting}
-                                    color='primary'>{props.isSubmitting ? "Loading" : "Sign up"}</Button>
+                                    color='primary' style={btn}>{props.isSubmitting ? "Loading" : "Sign up"}</Button>
                         </Form>
                     )}
                 </Formik>

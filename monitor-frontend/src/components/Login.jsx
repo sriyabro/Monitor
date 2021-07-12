@@ -68,26 +68,12 @@ const Login = ({ handleChange }) => {
                             <Field as={TextField} label='Password' name="password"
                                    placeholder='Enter password' type='password' fullWidth required
                                    helperText={<ErrorMessage name="password" />} />
-                            {/* <Field as={FormControlLabel}
-                                   name='remember'
-                                   control={
-                                       <Checkbox
-                                           color="primary"
-                                       />
-                                   }
-                                   label="Remember me"
-                            /> */}
                             <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
                                     style={btn} fullWidth>{props.isSubmitting ? "Loading" : "Sign in"}</Button>
 
                         </Form>
                     )}
                 </Formik>
-                {/* <Typography >
-                    <Link href="#" >
-                        Forgot password ?
-                    </Link>
-                </Typography> */}
                 <Typography > Do you have an account ?
                     <Link href="#" onClick={() => handleChange("event", 1)} >
                         Sign Up

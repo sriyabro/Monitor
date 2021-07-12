@@ -117,4 +117,5 @@ const AlertHistory = () => {
 }
 
 
-export default AlertHistory
+export default AlertHistory;
+
