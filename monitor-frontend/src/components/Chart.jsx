@@ -43,7 +43,7 @@ const Chart = ({sensor}) => {
             y: {
                 title : {
                   display: true,
-                  text: "Temp unit"
+                  text: "Temp unit(C)"
                 },
                 beginAtZero : true
             }

@@ -101,20 +101,20 @@ const AddSensor = (props) => {
                                          required/>
                         </Col>
                         <Col xs={8} className="pt-2">
-                            &nbsp; Threshold Value
+                            &nbsp; Threshold Value(C)
                             <NumberFormat className="form-control input-field"
                                           displayType={'input'}
                                           onChange={handleThresholdChange}
                                           required/>
                         </Col>
-                        <Col xs={4} className="pt-2 pl-0">
+                        {/* <Col xs={4} className="pt-2 pl-0">
                             &nbsp; Unit
                             <Select className="select-control" classNamePrefix="select-control"
                                     options={unitOptions}
                                     onChange={handleSensorUnitChange}
                                     value={unitOptions.value}
                             />
-                        </Col>
+                        </Col> */}
                     </Row>
                 </Modal.Body>
                 <Modal.Footer>
