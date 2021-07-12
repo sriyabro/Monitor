@@ -1,18 +1,18 @@
 import React, {useState} from 'react'
 import {Alert, Button, Col, FormControl, Modal, Row} from "react-bootstrap";
 import NumberFormat from "react-number-format";
-import Select from "react-select";
+//import Select from "react-select";
 import {AlertTriangle} from "react-feather";
 import jwtDecode from "jwt-decode";
 import Axios from 'axios';
 import Swal from 'sweetalert2';
 
-const unitOptions = [
-    {label: 'C', value: 'C'},
-    {label: 'F', value: 'F'},
-    {label: 'm', value: 'm'},
-    {label: 'Km/h', value: 'Km/h'},
-]
+// const unitOptions = [
+//     {label: 'C', value: 'C'},
+//     {label: 'F', value: 'F'},
+//     {label: 'm', value: 'm'},
+//     {label: 'Km/h', value: 'Km/h'},
+// ]
 
 const AddSensor = (props) => {
 
@@ -22,12 +22,12 @@ const AddSensor = (props) => {
     const url = "http://localhost:6500/sensors/add";
     const [sensorName, setSensorName] = useState(null);
     const [sensorThreshold, setSensorThreshold] = useState(null);
-    const [sensorUnit, setSensorUnit] = useState(null);
+    //const [sensorUnit, setSensorUnit] = useState(null);
     const [formInvalid, setFormInvalid] = useState(false);
 
     const handleAddNewSensor = (e) => {
         e.preventDefault();
-        if (!sensorName || !sensorThreshold || sensorName === '' || sensorThreshold === '' || !sensorUnit ) {
+        if (!sensorName || !sensorThreshold || sensorName === '' || sensorThreshold === '' ) {
             setFormInvalid(true);
             return;
         }
@@ -61,14 +61,14 @@ const AddSensor = (props) => {
         })
         setSensorName(null);
         setSensorThreshold(null);
-        setSensorUnit(null);
+       // setSensorUnit(null);
     }
 
     const handleSensorNameChange = (e) => setSensorName(e.target.value);
 
     const handleThresholdChange = (e) => setSensorThreshold(e.target.value);
 
-    const handleSensorUnitChange = (option) => setSensorUnit(option.value);
+    //const handleSensorUnitChange = (option) => setSensorUnit(option.value);
 
     const handleClose = () => {
         props.handleClose();
