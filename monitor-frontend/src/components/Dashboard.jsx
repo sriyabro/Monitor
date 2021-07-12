@@ -105,9 +105,20 @@ const Dashboard = () => {
 
             </Col>
            <Col xs={12} sm={7} lg={4} className="text-right">
-               <Button className="history text-danger border-danger" onClick={handleAlertHistoryButton}>
-                   <Activity/> &nbsp; View Sensor Alert History
-               </Button>
+               {
+                   selectedSensor === null ? 
+                   (
+                    <Button className="history text-danger border-danger" onClick={handleAlertHistoryButton} disabled>
+                        <Activity/> &nbsp; View Sensor Alert History
+                    </Button>
+                   ):
+                   (
+                    <Button className="history text-danger border-danger" onClick={handleAlertHistoryButton}>
+                        <Activity/> &nbsp; View Sensor Alert History
+                    </Button>                       
+                   )
+               }
+
            </Col>
             <Chart sensor={selectedSensor}/>
         </Row>
