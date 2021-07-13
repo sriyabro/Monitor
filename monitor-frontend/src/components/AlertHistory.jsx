@@ -77,7 +77,7 @@ const AlertHistory = () => {
                     <h6 className="m-0">Threshold value :
                         <span className="text-danger"> {selectedSensor.sensor_threshold}</span></h6>
                 </Col>
-                <Col xs={12} md={6} className="text-right">
+                <Col xs={12} md={6} className="text-right pr-1">
 
                     <Button className="history text-danger border-danger" onClick={handleBackButtonClicked}>
                        <ChevronLeft/> &nbsp; Back to Sensor Readings &nbsp; <BarChart2/>

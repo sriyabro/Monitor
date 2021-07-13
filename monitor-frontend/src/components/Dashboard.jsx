@@ -119,7 +119,7 @@ const Dashboard = () => {
                                 value={selectorOptions?.value}
                         />
                     </Col>
-                    <Col xs={12} sm={5} lg="auto" className="pl-0 float-right">
+                    <Col xs={12} sm={5} lg="auto" className="pl-0 pr-1 float-right">
                         <Button className="new-sensor " onClick={handleAddSensorBtnClick}>
                             <Plus/> &nbsp; Add New Sensor
                         </Button>
@@ -127,7 +127,7 @@ const Dashboard = () => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={12}  className="text-right">
+                    <Col xs={12}  className="text-right pr-1">
                         {
                             selectedSensor === null ?
                                 (
