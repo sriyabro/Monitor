@@ -12,7 +12,7 @@ const Chart = ({sensor}) => {
         const sensor_times = []; //labels
         const sensor_values = []; //data
        sensor?.sensor_readings.forEach((reading) => {
-           sensor_times.push(reading.date_time);
+           sensor_times.push(reading.date_time.split(' ')[1].split(':')[0]);
            sensor_values.push(parseFloat(reading.values.toString()));
        });
        setSelectedSensorLabel(!sensor ? "No Sensor Selected" : sensor.sensor_name);
@@ -43,7 +43,7 @@ const Chart = ({sensor}) => {
             y: {
                 title : {
                   display: true,
-                  text: "Temp unit(C)"
+                  text: "C"
                 },
                 beginAtZero : true
             }
@@ -52,7 +52,7 @@ const Chart = ({sensor}) => {
 
     return (
         <React.Fragment>
-            <Col xs={12} className="pt-3 chart">
+            <Col xs={12} className="pt-0 chart">
                 <Line data={data} options={options}/>
             </Col>
         </React.Fragment>

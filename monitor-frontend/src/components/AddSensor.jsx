@@ -101,7 +101,7 @@ const AddSensor = (props) => {
                                          required/>
                         </Col>
                         <Col xs={8} className="pt-2">
-                            &nbsp; Threshold Value(C)
+                            &nbsp; Threshold Value ( &deg;C )
                             <NumberFormat className="form-control input-field"
                                           displayType={'input'}
                                           onChange={handleThresholdChange}
