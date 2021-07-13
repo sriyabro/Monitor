@@ -18,8 +18,8 @@ const transporter = nodemailer.createTransport({
 
 //vonage config
 const vonage = new Vonage({
-    apiKey: process.env.API_KEY,
-    apiSecret: process.env.API_SECRET
+    apiKey: process.env.VONAGE_API_KEY,
+    apiSecret: process.env.VONAGE_API_SECRET
 });
 
 module.exports = {admin_email, monitor_app, transporter, vonage}
