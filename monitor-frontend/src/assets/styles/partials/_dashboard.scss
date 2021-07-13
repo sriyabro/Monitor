@@ -1,4 +1,12 @@
 .sensors {
+  .sensor-name {
+    font-size: 1.8em;
+    font-weight: 500;
+  }
+  .current-value {
+    font-size: 1.5em;
+    font-weight: 500;
+  }
   .new-sensor {
     background-color: transparent;
     color: green;
@@ -19,7 +27,7 @@
     max-height: 50px;
 
     canvas {
-      max-height: 66vh;
+      max-height: 65vh;
     }
   }
 }
