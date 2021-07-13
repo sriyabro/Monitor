@@ -52,7 +52,7 @@ const Chart = ({sensor}) => {
 
     return (
         <React.Fragment>
-            <Col xs={12} className="pt-0 chart">
+            <Col xs={12} className="pt-0 pl-0 chart">
                 <Line data={data} options={options}/>
             </Col>
         </React.Fragment>
