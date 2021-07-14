@@ -12,3 +12,13 @@
 
 
 #### Project deployed at - https://monitor-b9f93.web.app/
+---
+
+Use following credentials to view mock data
+  
+  Email: 
+  
+    admin@monitor.com
+  Password: 
+    
+    12
