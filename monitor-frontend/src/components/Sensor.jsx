@@ -14,21 +14,22 @@ const Sensor = ({sensor, deleted}) => {
             text: `Are you sure you want to delete ${sensor.sensor_name}`,
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
             confirmButtonText: 'Delete'
         }).then((result) => {
             if (result.isConfirmed) {
                 try {
                     Axios.delete(
                         BACKEND_URL + "/sensors/" + sensor._id
-                    );
-                    deleted(true);
-                    Swal.fire(
-                        'Deleted!',
-                        `Sensor deleted successfully!`,
-                        'success'
-                    )
+                    ).then(() => {
+                        deleted(true);
+                        Swal.fire(
+                            'Deleted!',
+                            `Sensor deleted successfully!`,
+                            'success'
+                        )
+                    })
                 } catch (err) {
                     console.log(err);
                 }
