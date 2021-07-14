@@ -6,6 +6,9 @@
   .user {
     cursor: pointer;
   }
+  .user:hover {
+    color: #d9534f ;
+  }
 
   .logout {
     vertical-align: center;
