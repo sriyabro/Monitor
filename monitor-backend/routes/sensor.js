@@ -85,7 +85,16 @@ router.route('/user/:id').get(async(req,res) => {
 
 });
 
-
+//delete sensor
+router.route('/:id').delete( async(req, res) => {
+   try {
+       let sensor = await Sensor.findOneAndDelete({_id: req.params.id});
+       res.json(sensor);
+   }
+   catch (error) {
+       res.status(400).json('Error: '+ error)
+   }
+});
 
 
 module.exports = router;
