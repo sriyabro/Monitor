@@ -1,0 +1,23 @@
+.user-profile {
+  .sensor-list {
+    overflow-y: scroll;
+    max-height: 75vh;
+    min-height: 75vh;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: -ms-autohiding-scrollbar;  /* Internet Explorer 10+ */
+
+    .sensor:hover {
+      background-color: rgba(41, 43, 44, 0.2);
+    }
+
+    .delete-col {
+      display: flex;
+      align-items: center;
+
+      .delete {
+        vertical-align: center;
+        cursor: pointer;
+      }
+    }
+  }
+}
