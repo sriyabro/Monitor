@@ -8,10 +8,8 @@ router.route('/add').post(async (req,res) => {
 
     try {
 
-        let userOb = await User.findById(req.body.sensor_user);
-    
         //Create New User
-        const sensor_user = userOb;
+        const sensor_user = await User.findById(req.body.sensor_user);
         const sensor_name = req.body.sensor_name;
         const sensor_threshold = req.body.sensor_threshold;
 
