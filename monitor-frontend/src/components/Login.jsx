@@ -6,12 +6,13 @@ import * as Yup from 'yup'
 import Axios from 'axios';
 import Swal from 'sweetalert2';
 import {useHistory} from 'react-router-dom';
+import {BACKEND_URL} from "../constants/constants";
 
 
 const Login = ({ handleChange }) => {
 
     const history = useHistory();
-    const url = 'http://localhost:6500/users/login';
+    const url = BACKEND_URL + '/users/login';
     const paperStyle = { padding: 20, height: '60vh', width: 300, margin: "0 auto" }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
     const btn = { margin: '8px 0' }

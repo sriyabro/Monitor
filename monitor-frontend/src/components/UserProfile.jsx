@@ -1,22 +1,30 @@
 import React, {useEffect, useState} from 'react';
-import {Col, Row} from "react-bootstrap";
+import {Button, Col, Row} from "react-bootstrap";
 import Header from "./Header";
 import jwtDecode from "jwt-decode";
 import Axios from "axios";
-import {Trash2} from "react-feather";
-import SensorItem from "./SensorItem";
+import Sensor from "./Sensor";
+import {BarChart2, ChevronLeft} from "react-feather";
+import {useHistory} from "react-router-dom";
+import {BACKEND_URL} from "../constants/constants";
 
 const UserProfile = () => {
     const jwt = localStorage.getItem("token");
     let userID = jwtDecode(jwt)._id;
+    const history = useHistory();
 
     const [user, setUser] = useState(null);
     const [sensors, setSensors] = useState([]);
+    const [deleted, setDeleted] = useState(false);
+
+    const handleDeleted = (state) => {
+        setDeleted(state);
+    }
 
     const getUserDetails = async () => {
         try {
             const user = await Axios.get(
-                "http://localhost:6500/users/" + userID
+                BACKEND_URL + "/users/" + userID
             );
             setUser(user.data);
         } catch (err) {
@@ -27,7 +35,7 @@ const UserProfile = () => {
     const getUserSensors = async () => {
         try {
             const sensors = await Axios.get(
-                "http://localhost:6500/sensors/user/" + userID
+                BACKEND_URL + "/sensors/user/" + userID
             );
             setSensors(sensors.data);
         } catch (err) {
@@ -40,8 +48,13 @@ const UserProfile = () => {
         getUserSensors();
     }, [])
 
-    console.log(sensors);
-    console.log(user);
+    useEffect(() => {
+        getUserSensors();
+    }, [deleted])
+
+    const handleBackButtonClicked = () => {
+        history.push('/dashboard')
+    }
 
     return (
         <React.Fragment>
@@ -54,12 +67,21 @@ const UserProfile = () => {
                     <h5 className="p-1">Contact No.: <span className="text-dark">{user?.user_Contact}</span></h5>
                 </Col>
                 <Col xs={12} md={6}>
-                    <h4>Sensors : </h4>
+                    <Row>
+                        <Col xs={12} className="text-right px-1">
+                            <Button className="back text-danger border-danger" onClick={handleBackButtonClicked}>
+                                <ChevronLeft/> &nbsp; Back to Dashboard &nbsp; <BarChart2/>
+                            </Button>
+                        </Col>
+                        <Col xs={12}>
+                            <h3 className="m-0 pt-2">Sensors : </h3>
+                        </Col>
+                    </Row>
                     <Row className="sensor-list">
                         <Col xs={12}>
                             {sensors.map((sensor) => {
                                 return (
-                                    <SensorItem sensor={sensor} key={sensor._id}/>
+                                    <Sensor sensor={sensor} deleted={handleDeleted} key={sensor._id}/>
                                 );
                             })}
                         </Col>
@@ -67,7 +89,7 @@ const UserProfile = () => {
                 </Col>
             </Row>
         </React.Fragment>
-);
+    );
 }
 
 export default UserProfile;

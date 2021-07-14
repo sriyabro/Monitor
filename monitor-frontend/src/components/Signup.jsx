@@ -5,11 +5,12 @@ import {ErrorMessage, Field, Form, Formik} from 'formik'
 import * as Yup from 'yup'
 import Axios from 'axios';
 import Swal from 'sweetalert2';
+import {BACKEND_URL} from "../constants/constants";
 
 
 const Signup = () => {
 
-    const url = 'http://localhost:6500/users/add';
+    const url = BACKEND_URL + '/users/add';
     const paperStyle = { padding: 20, width: 300, margin: "0 auto" }
     const headerStyle = { margin: 0 }
     const avatarStyle = { backgroundColor: '#1bbd7e' }

@@ -12,6 +12,7 @@ import {BarChart2, ChevronLeft} from "react-feather";
 import {useHistory} from "react-router-dom";
 import Header from "./Header";
 import Axios from "axios";
+import {BACKEND_URL} from "../constants/constants";
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -50,7 +51,7 @@ const AlertHistory = () => {
         const sensorID = localStorage.getItem("selectedSensorId");
         try {
             const data = await Axios.get(
-                "http://localhost:6500/sensors/" + sensorID
+                BACKEND_URL + "/sensors/" + sensorID
             );
             setSelectedSensor(data.data);
         } catch (err) {
