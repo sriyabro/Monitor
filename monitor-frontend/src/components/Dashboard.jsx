@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 import Select from 'react-select';
 import {Button, Col, Row} from "react-bootstrap";
 import {Activity, Plus} from 'react-feather';
-import {customStyles} from "../constants/constants";
+import {BACKEND_URL, customStyles} from "../constants/constants";
 import Header from "./Header";
 import Chart from "./Chart";
 import AddSensor from "./AddSensor";
@@ -24,7 +24,7 @@ const Dashboard = () => {
 
             try {
               const data = await Axios.get(
-                "http://localhost:6500/sensors/user/" + userID
+                BACKEND_URL + "/sensors/user/" + userID
               );
               setSensors(data.data);
 

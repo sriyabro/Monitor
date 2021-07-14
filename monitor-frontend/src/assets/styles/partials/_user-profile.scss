@@ -1,10 +1,18 @@
 .user-profile {
+  .back {
+    background-color: transparent;
+  }
+
+  .back:hover {
+    background-color: rgba(217, 83, 79, 0.2);
+  }
+
   .sensor-list {
     overflow-y: scroll;
     max-height: 75vh;
     min-height: 75vh;
     scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: -ms-autohiding-scrollbar;  /* Internet Explorer 10+ */
+    -ms-overflow-style: -ms-autohiding-scrollbar; /* Internet Explorer 10+ */
 
     .sensor:hover {
       background-color: rgba(41, 43, 44, 0.2);

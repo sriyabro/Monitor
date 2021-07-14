@@ -6,6 +6,7 @@ import {AlertTriangle} from "react-feather";
 import jwtDecode from "jwt-decode";
 import Axios from 'axios';
 import Swal from 'sweetalert2';
+import {BACKEND_URL} from "../constants/constants";
 
 // const unitOptions = [
 //     {label: 'C', value: 'C'},
@@ -19,7 +20,7 @@ const AddSensor = (props) => {
     const jwt = localStorage.getItem("token");
     let userID = jwtDecode(jwt)._id;
 
-    const url = "http://localhost:6500/sensors/add";
+    const url = BACKEND_URL + "/sensors/add";
     const [sensorName, setSensorName] = useState(null);
     const [sensorThreshold, setSensorThreshold] = useState(null);
     //const [sensorUnit, setSensorUnit] = useState(null);
