@@ -127,7 +127,7 @@ const Dashboard = () => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={12}  className="text-right pr-1">
+                    <Col xs={12}  className="text-right pr-1 pt-2">
                         {
                             selectedSensor === null ?
                                 (
