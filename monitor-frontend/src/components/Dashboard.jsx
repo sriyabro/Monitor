@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 import Select from 'react-select';
 import {Button, Col, Row} from "react-bootstrap";
 import {Activity, Plus} from 'react-feather';
-import {BACKEND_URL, customStyles} from "../constants/constants";
+import {BACKEND_URL, sensorSelectStyles} from "../constants/constants";
 import Header from "./Header";
 import Chart from "./Chart";
 import AddSensor from "./AddSensor";
@@ -114,7 +114,7 @@ const Dashboard = () => {
                                 isSearchable
                                 noOptionsMessage={() => ("No Sensors Found, Please Create a New Sensor")}
                                 options={!selectorOptions ? [] : selectorOptions}
-                                styles={customStyles}
+                                styles={sensorSelectStyles}
                                 onChange={handleSensorChange}
                                 value={selectorOptions?.value}
                         />

@@ -1,19 +1,11 @@
 import React, {useState} from 'react'
 import {Alert, Button, Col, FormControl, Modal, Row} from "react-bootstrap";
 import NumberFormat from "react-number-format";
-//import Select from "react-select";
 import {AlertTriangle} from "react-feather";
 import jwtDecode from "jwt-decode";
 import Axios from 'axios';
 import Swal from 'sweetalert2';
 import {BACKEND_URL} from "../constants/constants";
-
-// const unitOptions = [
-//     {label: 'C', value: 'C'},
-//     {label: 'F', value: 'F'},
-//     {label: 'm', value: 'm'},
-//     {label: 'Km/h', value: 'Km/h'},
-// ]
 
 const AddSensor = (props) => {
 
@@ -28,7 +20,7 @@ const AddSensor = (props) => {
 
     const handleAddNewSensor = (e) => {
         e.preventDefault();
-        if (!sensorName || !sensorThreshold || sensorName === '' || sensorThreshold === '' ) {
+        if (!sensorName || !sensorThreshold || sensorName === '' || sensorThreshold === '') {
             setFormInvalid(true);
             return;
         }
@@ -38,38 +30,34 @@ const AddSensor = (props) => {
             sensor_user: userID,
             sensor_name: sensorName,
             sensor_threshold: sensorThreshold,
-            //unit: sensorUnit
         }
 
-        Axios.post(url,newSensor)
-        .then(res => {
-            console.log(res.data)
-            if (res.data === "Sensor Added!") {
+        Axios.post(url, newSensor)
+            .then(res => {
+                console.log(res.data)
+                if (res.data === "Sensor Added!") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sensor Added!',
+                    })
+                    props.handleAddNewSensor();
+                    handleClose();
+                }
+            })
+            .catch(() => {
                 Swal.fire({
-                    icon: 'success',
-                    title: 'Sensor Added!',
-                  })
-                props.handleAddNewSensor();
-                handleClose();
-            } 
-        })
-        .catch(()=> {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
-              })
-        })
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                })
+            })
         setSensorName(null);
         setSensorThreshold(null);
-       // setSensorUnit(null);
     }
 
     const handleSensorNameChange = (e) => setSensorName(e.target.value);
 
     const handleThresholdChange = (e) => setSensorThreshold(e.target.value);
-
-    //const handleSensorUnitChange = (option) => setSensorUnit(option.value);
 
     const handleClose = () => {
         props.handleClose();
@@ -108,21 +96,14 @@ const AddSensor = (props) => {
                                           onChange={handleThresholdChange}
                                           required/>
                         </Col>
-                        {/* <Col xs={4} className="pt-2 pl-0">
-                            &nbsp; Unit
-                            <Select className="select-control" classNamePrefix="select-control"
-                                    options={unitOptions}
-                                    onChange={handleSensorUnitChange}
-                                    value={unitOptions.value}
-                            />
-                        </Col> */}
                     </Row>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button className="cancel text-danger border-danger" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button className="add-sensor text-primary border-primary" onClick={handleAddNewSensor}>Add Sensor</Button>
+                    <Button className="add-sensor text-primary border-primary" onClick={handleAddNewSensor}>Add
+                        Sensor</Button>
                 </Modal.Footer>
             </Modal>
         </>

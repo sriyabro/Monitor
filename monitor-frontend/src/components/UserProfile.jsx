@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Col, Row} from "react-bootstrap";
+import {Button, Col, Form, Row} from "react-bootstrap";
 import Header from "./Header";
 import jwtDecode from "jwt-decode";
 import Axios from "axios";
 import Sensor from "./Sensor";
 import {BarChart2, ChevronLeft} from "react-feather";
 import {useHistory} from "react-router-dom";
-import {BACKEND_URL} from "../constants/constants";
+import {BACKEND_URL, notificationOptions, notificationSelectStyles} from "../constants/constants";
+import Select from "react-select";
+import Swal from "sweetalert2";
 
 const UserProfile = () => {
     const jwt = localStorage.getItem("token");
@@ -56,6 +58,39 @@ const UserProfile = () => {
         history.push('/dashboard')
     }
 
+    const handleNotificationChange = (option) => {
+        let selectedOption = option;
+        if(option) {
+            Swal.fire({
+                title: 'Notification Method',
+                text: `Set Notification Channel to ${selectedOption.label}?`,
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonColor: '#3085d6',
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Confirm'
+            }).then((result) => {
+                // if (result.isConfirmed) {
+                //     try {
+                //         Axios.(
+                //             BACKEND_URL + "/sensors/" + selectedOption.value
+                //         ).then(() => {
+                //             deleted(true);
+                //             Swal.fire(
+                //                 'Deleted!',
+                //                 `Sensor deleted successfully!`,
+                //                 'success'
+                //             )
+                //         })
+                //     } catch (err) {
+                //         console.log(err);
+                //     }
+                // }
+                console.log(selectedOption.value)
+            })
+        }
+    }
+
     return (
         <React.Fragment>
             <Header/>
@@ -65,6 +100,13 @@ const UserProfile = () => {
                     <h5 className="p-1">Username: <span className="text-dark">{user?.user_Name}</span></h5>
                     <h5 className="p-1">Email: <span className="text-dark">{user?.user_Email}</span></h5>
                     <h5 className="p-1">Contact No.: <span className="text-dark">{user?.user_Contact}</span></h5>
+                    <h5 className="px-1 pt-5">Select Notification Method: </h5>
+                    <Select className="ml-3"
+                            options={notificationOptions}
+                            styles={notificationSelectStyles}
+                            onChange={handleNotificationChange}
+                            value={notificationOptions?.filter(option => option.value === user?.notification)}
+                    />
                 </Col>
                 <Col xs={12} md={6}>
                     <Row>

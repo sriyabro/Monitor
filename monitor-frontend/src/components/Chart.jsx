@@ -12,7 +12,7 @@ const Chart = ({sensor}) => {
         const sensor_times = []; //labels
         const sensor_values = []; //data
        sensor?.sensor_readings.forEach((reading) => {
-           sensor_times.push(reading.date_time.split(' ')[1].split(':')[0]);
+           sensor_times.push(reading.date_time.split(' ')[1].split(':')[0]+":"+reading.date_time.split(' ')[1].split(':')[1]);
            sensor_values.push(parseFloat(reading.values.toString()));
        });
        setSelectedSensorLabel(!sensor ? "No Sensor Selected" : sensor.sensor_name);

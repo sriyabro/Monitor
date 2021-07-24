@@ -19,13 +19,14 @@ router.route('/add').post( async(req,res) => {
         const user_Contact = req.body.user_Contact; 
         const user_Email = req.body.user_Email;
         const user_Password = req.body.user_Password;
+        const notification = "EMAIL"
 
         const newUser = new User({
-
             user_Name, 
             user_Contact, 
             user_Email, 
-            user_Password 
+            user_Password,
+            notification
         });
 
          const salt = await bcrypt.genSalt(10)
@@ -77,6 +78,10 @@ router.route('/:id').get((req,res) => {
     .then(users => res.json(users))
     .catch(err => res.status(400).json('Error: '+ err));
 });
+
+
+//set Notification Method
+
 
 
 
