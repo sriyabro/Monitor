@@ -10,6 +10,7 @@ import {BACKEND_URL, notificationOptions, notificationSelectStyles} from "../con
 import Select from "react-select";
 import Swal from "sweetalert2";
 
+
 const UserProfile = () => {
     const jwt = localStorage.getItem("token");
     let userID = jwtDecode(jwt)._id;
@@ -100,6 +101,7 @@ const UserProfile = () => {
                     <h5 className="p-1">Username: <span className="text-dark">{user?.user_Name}</span></h5>
                     <h5 className="p-1">Email: <span className="text-dark">{user?.user_Email}</span></h5>
                     <h5 className="p-1">Contact No.: <span className="text-dark">{user?.user_Contact}</span></h5>
+
                     <h5 className="px-1 pt-5">Select Notification Method: </h5>
                     <Select className="ml-3"
                             options={notificationOptions}

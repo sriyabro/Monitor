@@ -9,6 +9,8 @@ import {BACKEND_URL} from "../constants/constants";
 
 const AddSensor = (props) => {
 
+const AddSensor = (props) => {
+
     const jwt = localStorage.getItem("token");
     let userID = jwtDecode(jwt)._id;
 
@@ -20,7 +22,9 @@ const AddSensor = (props) => {
 
     const handleAddNewSensor = (e) => {
         e.preventDefault();
-        if (!sensorName || !sensorThreshold || sensorName === '' || sensorThreshold === '') {
+
+        if (!sensorName || !sensorThreshold || sensorName === '' || sensorThreshold === '' ) {
+
             setFormInvalid(true);
             return;
         }
@@ -30,6 +34,7 @@ const AddSensor = (props) => {
             sensor_user: userID,
             sensor_name: sensorName,
             sensor_threshold: sensorThreshold,
+
         }
 
         Axios.post(url, newSensor)
