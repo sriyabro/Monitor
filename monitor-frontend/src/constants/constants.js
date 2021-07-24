@@ -1,4 +1,5 @@
-export const BACKEND_URL = "https://monitor-backend.herokuapp.com";
+// export const BACKEND_URL = "https://monitor-backend.herokuapp.com";
+export const BACKEND_URL = "http://localhost:6500";
 
 export const sensorSelectStyles = {
     control: (provided) => ({

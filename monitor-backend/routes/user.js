@@ -72,6 +72,7 @@ router.route('/').get((req,res) => {
     .catch(err => res.status(400).json('Error: '+ err));
 });
 
+
 //get users by ID
 router.route('/:id').get((req,res) => {
     User.findById(req.params.id)
@@ -81,8 +82,15 @@ router.route('/:id').get((req,res) => {
 
 
 //set Notification Method
-
-
+router.route('/:id').post( async (req, res) => {
+        await User.findByIdAndUpdate(req.params.id, {notification: req.body.notification})
+            .then(() => {
+                res.status(200).json('User Updated!')
+            })
+            .catch((error) => {
+                res.status(400).json('Error: '+ error)
+            })
+})
 
 
 module.exports = router;
