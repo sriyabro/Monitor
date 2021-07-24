@@ -18,7 +18,6 @@ const UserProfile = () => {
     const [user, setUser] = useState(null);
     const [sensors, setSensors] = useState([]);
     const [deleted, setDeleted] = useState(false);
-    const [notificationUpdate, setNotificationUpdate] = useState(false);
 
     const handleDeleted = (state) => {
         setDeleted(state);
@@ -55,18 +54,13 @@ const UserProfile = () => {
         getUserSensors();
     }, [deleted])
 
-    useEffect(() => {
-        getUserDetails();
-    }, [notificationUpdate])
-
     const handleBackButtonClicked = () => {
         history.push('/dashboard')
     }
 
     const handleNotificationChange = (option) => {
-        setNotificationUpdate(false);
         let selectedOption = option;
-        if(option) {
+        if (option) {
             Swal.fire({
                 title: 'Update Notification Method',
                 text: `Set Notification Method to ${selectedOption.label}?`,
@@ -82,7 +76,7 @@ const UserProfile = () => {
                             BACKEND_URL + "/users/" + user._id,
                             {notification: selectedOption}
                         ).then((res) => {
-                            setNotificationUpdate(true);
+                            getUserDetails();
                             Swal.fire(
                                 'Done!',
                                 res.data,
