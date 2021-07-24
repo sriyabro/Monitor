@@ -83,9 +83,9 @@ router.route('/:id').get((req,res) => {
 
 //set Notification Method
 router.route('/:id').post( async (req, res) => {
-        await User.findByIdAndUpdate(req.params.id, {notification: req.body.notification})
+        await User.findByIdAndUpdate(req.params.id, {notification: req.body.notification.value})
             .then(() => {
-                res.status(200).json('User Updated!')
+                res.status(200).json(`Notification Method Updated to ${req.body.notification.label}`)
             })
             .catch((error) => {
                 res.status(400).json('Error: '+ error)

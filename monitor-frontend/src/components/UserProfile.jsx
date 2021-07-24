@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Col, Form, Row} from "react-bootstrap";
+import {Button, Col, Row} from "react-bootstrap";
 import Header from "./Header";
 import jwtDecode from "jwt-decode";
 import Axios from "axios";
@@ -18,6 +18,7 @@ const UserProfile = () => {
     const [user, setUser] = useState(null);
     const [sensors, setSensors] = useState([]);
     const [deleted, setDeleted] = useState(false);
+    const [notificationUpdate, setNotificationUpdate] = useState(false);
 
     const handleDeleted = (state) => {
         setDeleted(state);
@@ -54,39 +55,44 @@ const UserProfile = () => {
         getUserSensors();
     }, [deleted])
 
+    useEffect(() => {
+        getUserDetails();
+    }, [notificationUpdate])
+
     const handleBackButtonClicked = () => {
         history.push('/dashboard')
     }
 
     const handleNotificationChange = (option) => {
+        setNotificationUpdate(false);
         let selectedOption = option;
         if(option) {
             Swal.fire({
-                title: 'Notification Method',
-                text: `Set Notification Channel to ${selectedOption.label}?`,
+                title: 'Update Notification Method',
+                text: `Set Notification Method to ${selectedOption.label}?`,
                 icon: 'question',
                 showCancelButton: true,
                 cancelButtonColor: '#3085d6',
                 confirmButtonColor: '#d33',
                 confirmButtonText: 'Confirm'
             }).then((result) => {
-                // if (result.isConfirmed) {
-                //     try {
-                //         Axios.(
-                //             BACKEND_URL + "/sensors/" + selectedOption.value
-                //         ).then(() => {
-                //             deleted(true);
-                //             Swal.fire(
-                //                 'Deleted!',
-                //                 `Sensor deleted successfully!`,
-                //                 'success'
-                //             )
-                //         })
-                //     } catch (err) {
-                //         console.log(err);
-                //     }
-                // }
-                console.log(selectedOption.value)
+                if (result.isConfirmed) {
+                    try {
+                        Axios.post(
+                            BACKEND_URL + "/users/" + user._id,
+                            {notification: selectedOption}
+                        ).then((res) => {
+                            setNotificationUpdate(true);
+                            Swal.fire(
+                                'Done!',
+                                res.data,
+                                'success'
+                            )
+                        })
+                    } catch (err) {
+                        console.log(err);
+                    }
+                }
             })
         }
     }
