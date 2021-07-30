@@ -11,6 +11,7 @@ body {
   font-size: 1em;
 }
 
+@import "partials/auth";
 @import "partials/header";
 @import "partials/dashboard";
 @import "partials/add-sensor";

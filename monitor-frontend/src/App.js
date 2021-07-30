@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import "./assets/styles/main.scss"
 import routes from "./routes/routes";
 import Footer from "./components/Footer";
-import './App.css';
+import AuthRoute from "./components/auth/AuthRoute";
 
 function App() {
   return (
@@ -18,8 +18,8 @@ function App() {
                             path={route.path}
                             exact={route.exact}
                             render={(routeProps) => {
-                                // if (route.protected)
-                                //     return <AuthRoute><route.component  {...routeProps} /></AuthRoute>;
+                                if (route.protected)
+                                    return <AuthRoute><route.component  {...routeProps} /></AuthRoute>;
 
                                 return <route.component  {...routeProps} />
                             }}

@@ -56,7 +56,7 @@ const UserProfile = () => {
     }, [deleted])
 
     const handleBackButtonClicked = () => {
-        history.push('/dashboard')
+        history.push('/')
     }
 
     const handleNotificationChange = (option) => {
@@ -77,12 +77,13 @@ const UserProfile = () => {
                             BACKEND_URL + "/users/" + user._id,
                             {notification: selectedOption}
                         ).then((res) => {
-                            getUserDetails();
-                            Swal.fire(
-                                'Done!',
-                                res.data,
-                                'success'
-                            )
+                            getUserDetails().then(() => {
+                                Swal.fire(
+                                    'Done!',
+                                    res.data,
+                                    'success'
+                                );
+                            });
                         })
                     } catch (err) {
                         console.log(err);

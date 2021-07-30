@@ -24,7 +24,8 @@
     background-color: rgba(217,83,79,0.2);
   }
   .chart {
-    max-height: 50px;
+    min-height: 65vh;
+
 
     canvas {
       max-height: 65vh;

@@ -65,7 +65,7 @@ const AlertHistory = () => {
 
 
     const handleBackButtonClicked = () => {
-        history.push('/dashboard');
+        history.push('/');
     }
 
     return (
