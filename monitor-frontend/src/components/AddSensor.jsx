@@ -9,8 +9,6 @@ import {BACKEND_URL} from "../constants/constants";
 
 const AddSensor = (props) => {
 
-const AddSensor = (props) => {
-
     const jwt = localStorage.getItem("token");
     let userID = jwtDecode(jwt)._id;
 

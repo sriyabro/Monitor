@@ -22,7 +22,7 @@ const Header = () => {
     return (
         <Row className="p-2 header">
             <Col xs={6}>
-                <h1 className="logo my-0 pl-2" onClick={() => history.push('/')}>Monitor</h1>
+                <h1 className="logo my-0 pl-2 text" onClick={() => history.push('/')}>Monitor</h1>
             </Col>
             <Col xs={6} className="text-right">
                 <span className="user mr-4 d-none d-md-inline" onClick={handleUserClicked}><User/> {userName}</span>

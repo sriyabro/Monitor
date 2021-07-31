@@ -1,8 +1,11 @@
 const nodemailer = require('nodemailer');
 const Vonage = require('@vonage/server-sdk');
 require('dotenv').config();
+const vonagePrivateKey = `${__dirname}/${process.env.VONAGE_PRIVATE_KEY}`;
+console.log(vonagePrivateKey);
 
 const admin_email = process.env.EMAIL;
+const admin_number = process.env.NUMBER;
 const monitor_app = "Monitor App";
 
 //nodemailer config
@@ -19,7 +22,9 @@ const transporter = nodemailer.createTransport({
 //vonage config
 const vonage = new Vonage({
     apiKey: process.env.VONAGE_API_KEY,
-    apiSecret: process.env.VONAGE_API_SECRET
+    apiSecret: process.env.VONAGE_API_SECRET,
+    applicationId: process.env.VONAGE_APPLICATION_ID,
+    privateKey: vonagePrivateKey
 });
 
-module.exports = {admin_email, monitor_app, transporter, vonage}
+module.exports = {admin_email, admin_number, monitor_app, transporter, vonage}

@@ -7,6 +7,7 @@ const alertUser = (sensor, value) => {
     let notificationMethod = sensor.sensor_user.notification;
     let message = `Reading of ${sensor.sensor_name} : ${value} is over the threshold (${sensor.sensor_threshold}). Please login to Monitor and check the sensors`;
 
+    //Send Email Notification
     if (notificationMethod === "EMAIL") {
         //send email alert with nodemailer
         let mailOptions = {
@@ -29,6 +30,7 @@ const alertUser = (sensor, value) => {
 
     }
 
+    //Send Text Notification
     if (notificationMethod === "SMS") {
         //send SMS alert with vonage
         config.vonage.message.sendSms(config.monitor_app, user_tp, message, (err, responseData) => {
@@ -44,10 +46,28 @@ const alertUser = (sensor, value) => {
         });
     }
 
+    //Send Voice Notification
     if (notificationMethod === "VOICE") {
-        console.log("Voice Alert Sent to :", user_tp);
+        config.vonage.calls.create({
+            to: [{
+                type: 'phone',
+                number: user_tp
+            }],
+            from: {
+                type: 'phone',
+                number: config.admin_number
+            },
+            ncco: [{
+                "action": "talk",
+                "text": message
+            }]
+        }, (error, response) => {
+            if (error) console.error("Error sending Voice Alert",error)
+            if (response) {
+                console.log(`Voice Alert Sent to : ${user_tp}`, response);
+            }
+        })
     }
-
 };
 
 module.exports = alertUser;
