@@ -9,7 +9,6 @@ import {useHistory} from "react-router-dom";
 import {BACKEND_URL} from "../config";
 import Select from "react-select";
 import Swal from "sweetalert2";
-import {autoAddData} from "../controllers/autoData";
 import {notificationOptions, notificationSelectStyles} from "../constants/constants";
 
 const UserProfile = () => {
@@ -20,8 +19,6 @@ const UserProfile = () => {
     const [user, setUser] = useState(null);
     const [sensors, setSensors] = useState([]);
     const [deleted, setDeleted] = useState(false);
-    const [addDataDisabled, setAddDataDisabled] = useState(false);
-
 
     const handleDeleted = (state) => {
         setDeleted(state);
@@ -98,33 +95,6 @@ const UserProfile = () => {
         }
     }
 
-    const handleAddData = () => {
-        Swal.fire({
-            title: 'Add Mock Data',
-            text: `Add data with random reading value for random times within a day to all sensors in user account`,
-            icon: 'info',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Start'
-        })
-            .then((result) => {
-                if (result.isConfirmed) {
-                    if (sensors.length !== 0) {
-                        setAddDataDisabled(true);
-                        autoAddData(sensors);
-                    } else {
-                        Swal.fire({
-                            title: 'No Sensors to add data',
-                            icon: 'error'
-                        })
-                        console.log("No sensors to add data");
-                    }
-                }
-            })
-    }
-
-
     return (
         <React.Fragment>
             <Header/>
@@ -142,10 +112,6 @@ const UserProfile = () => {
                             onChange={handleNotificationChange}
                             value={notificationOptions?.filter(option => option.value === user?.notification)}
                     />
-                    <Button className="auto-data mb-3" variant="outline-dark" disabled={addDataDisabled}
-                            onClick={handleAddData}>
-                        Add Data
-                    </Button>
                 </Col>
                 <Col xs={12} md={6}>
                     <Row>
