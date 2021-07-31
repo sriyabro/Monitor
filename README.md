@@ -10,15 +10,15 @@
 - [Rahul Maduka](https://github.com/RahulMadhukaKeshara)
 - [Sriyanjith Herath](https://github.com/sriyabro)
 
-
 #### Project deployed at - https://monitor-b9f93.web.app/
+
 ---
 
 Use following credentials to view mock data
   
   Email: 
   
-    admin@monitor.com
+    user@monitor.com
   Password: 
     
-    12
+    123
