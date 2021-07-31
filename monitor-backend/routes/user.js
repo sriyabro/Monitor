@@ -12,7 +12,7 @@ router.route('/add').post(async (req, res) => {
     try {
         //Check Current Users
         let user = await User.findOne({user_Email: req.body.user_Email});
-        if (user) return res.status(400).send('Already Registered')
+        if (user) return res.status(200).json('Already Registered');
 
         //Create New User
         const user_Name = req.body.user_Name;

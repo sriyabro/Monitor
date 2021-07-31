@@ -56,13 +56,13 @@ const Chart = ({sensor}) => {
                 },
                 title: {
                     display: true,
-                    text: "Hours"
+                    text: "Time"
                 }
             },
             y: {
                 title: {
                     display: true,
-                    text: "C"
+                    text: `C`
                 },
                 beginAtZero: true
             }

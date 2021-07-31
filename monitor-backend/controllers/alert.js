@@ -5,7 +5,10 @@ const alertUser = (sensor, value) => {
     let user_email = sensor.sensor_user.user_Email;
     let user_tp = sensor.sensor_user.user_Contact;
     let notificationMethod = sensor.sensor_user.notification;
-    let message = `Reading of ${sensor.sensor_name} : ${value} is over the threshold (${sensor.sensor_threshold}). Please login to Monitor and check the sensors`;
+    let message = `Reading of ${sensor.sensor_name} is ${parseFloat(value) - parseFloat(sensor.sensor_threshold)}\u00B0C over the threshold (${sensor.sensor_threshold}\u00B0C). 
+    \nCurrent reading value: ${value}\u00B0C\nPlease login to Monitor (https://monitor-b9f93.web.app/) for more details`;
+    console.log(`Value: ${value}, Threshold:  ${sensor.sensor_threshold}`);
+
 
     //Send Email Notification
     if (notificationMethod === "EMAIL") {

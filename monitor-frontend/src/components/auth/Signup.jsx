@@ -41,6 +41,7 @@ const Signup = ({ handleChange }) => {
         })
         .then((res)=>{
             console.log(res.data)
+
             if(res.data === "User Added!"){
                 Swal.fire({
                   icon: 'success',
@@ -59,12 +60,13 @@ const Signup = ({ handleChange }) => {
             }
             
         })
-        .catch(() => {
+        .catch((err) => {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Something went wrong!',
+                text: err,
               })
+            console.log(err)
           });
         props.resetForm()
     }
