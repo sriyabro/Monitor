@@ -47,9 +47,13 @@ const Chart = ({sensor}) => {
                 // time: {
                 //     unit: 'hour',
                 // },
-                // ticks: {
-                //   callback: [0, 5, 10, 20]
-                // },
+                ticks: {
+                    // // Include a dollar sign in the ticks
+                    // callback: function(value, index, values) {
+                    //     return
+                    // }
+                    maxTickLimit: 10
+                },
                 title: {
                     display: true,
                     text: "Hours"

@@ -9,7 +9,7 @@ import {useHistory} from "react-router-dom";
 import {BACKEND_URL, notificationOptions, notificationSelectStyles} from "../constants/constants";
 import Select from "react-select";
 import Swal from "sweetalert2";
-
+import {autoAddData} from "../controllers/autoData";
 
 const UserProfile = () => {
     const jwt = localStorage.getItem("token");
@@ -19,6 +19,8 @@ const UserProfile = () => {
     const [user, setUser] = useState(null);
     const [sensors, setSensors] = useState([]);
     const [deleted, setDeleted] = useState(false);
+    const [addDataDisabled, setAddDataDisabled] = useState(false);
+
 
     const handleDeleted = (state) => {
         setDeleted(state);
@@ -49,10 +51,12 @@ const UserProfile = () => {
     useEffect(() => {
         getUserDetails();
         getUserSensors();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
         getUserSensors();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [deleted])
 
     const handleBackButtonClicked = () => {
@@ -93,6 +97,33 @@ const UserProfile = () => {
         }
     }
 
+    const handleAddData = () => {
+        Swal.fire({
+            title: 'Add Data',
+            text: `Add data with random reading value to all sensors in user account every 3 seconds for 5 mins or until the application is refreshed`,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Start'
+        })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    if (sensors.length !== 0) {
+                        setAddDataDisabled(true);
+                        autoAddData(sensors);
+                    } else {
+                        Swal.fire({
+                            title: 'No Sensors to add data',
+                            icon: 'error'
+                        })
+                        console.log("No sensors to add data");
+                    }
+                }
+            })
+    }
+
+
     return (
         <React.Fragment>
             <Header/>
@@ -110,6 +141,10 @@ const UserProfile = () => {
                             onChange={handleNotificationChange}
                             value={notificationOptions?.filter(option => option.value === user?.notification)}
                     />
+                    <Button className="auto-data mb-3" variant="outline-dark" disabled={addDataDisabled}
+                            onClick={handleAddData}>
+                        Add Data
+                    </Button>
                 </Col>
                 <Col xs={12} md={6}>
                     <Row>
