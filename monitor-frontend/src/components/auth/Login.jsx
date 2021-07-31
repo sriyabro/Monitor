@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 import Axios from 'axios';
 import Swal from 'sweetalert2';
 import {useHistory} from 'react-router-dom';
-import {BACKEND_URL} from "../../constants/constants";
+import {BACKEND_URL} from "../../config";
 
 
 const Login = ({handleChange}) => {

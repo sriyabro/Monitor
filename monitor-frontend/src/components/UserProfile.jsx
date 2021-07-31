@@ -6,10 +6,11 @@ import Axios from "axios";
 import Sensor from "./Sensor";
 import {BarChart2, ChevronLeft} from "react-feather";
 import {useHistory} from "react-router-dom";
-import {BACKEND_URL, notificationOptions, notificationSelectStyles} from "../constants/constants";
+import {BACKEND_URL} from "../config";
 import Select from "react-select";
 import Swal from "sweetalert2";
 import {autoAddData} from "../controllers/autoData";
+import {notificationOptions, notificationSelectStyles} from "../constants/constants";
 
 const UserProfile = () => {
     const jwt = localStorage.getItem("token");

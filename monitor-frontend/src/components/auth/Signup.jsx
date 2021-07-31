@@ -5,7 +5,7 @@ import {ErrorMessage, Field, Form, Formik} from 'formik'
 import * as Yup from 'yup'
 import Axios from 'axios';
 import Swal from 'sweetalert2';
-import {BACKEND_URL} from "../../constants/constants";
+import {BACKEND_URL} from "../../config";
 
 
 const Signup = ({ handleChange }) => {

@@ -3,12 +3,13 @@ import {useHistory} from 'react-router-dom';
 import Select from 'react-select';
 import {Button, Col, Row} from "react-bootstrap";
 import {Activity, Plus} from 'react-feather';
-import {BACKEND_URL, sensorSelectStyles} from "../constants/constants";
+import {BACKEND_URL} from "../config";
 import Header from "./Header";
 import Chart from "./Chart";
 import AddSensor from "./AddSensor";
 import jwtDecode from "jwt-decode";
 import Axios from 'axios';
+import {sensorSelectStyles} from "../constants/constants";
 
 const Dashboard = () => {
         const [selectorOptions, setSelectorOptions] = useState(null);

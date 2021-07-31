@@ -1,5 +1,5 @@
 import Axios from "axios";
-import {BACKEND_URL} from "../constants/constants";
+import {BACKEND_URL} from "../config";
 
 //Add data with random reading value to all sensors in user account every 3 seconds for 5 mins or until the application is refreshed
 export const autoAddData = (sensors) => {

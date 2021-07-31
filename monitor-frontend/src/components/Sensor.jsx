@@ -3,7 +3,7 @@ import {Col, Row} from "react-bootstrap";
 import {Trash2} from "react-feather";
 import Axios from "axios";
 import Swal from "sweetalert2";
-import {BACKEND_URL} from "../constants/constants";
+import {BACKEND_URL} from "../config";
 
 const Sensor = ({sensor, deleted}) => {
 
