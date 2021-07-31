@@ -1,8 +1,9 @@
 import React from 'react'
-import {Button, Col, Row} from "react-bootstrap";
-import {LogOut, User} from 'react-feather';
+import {Col, Image, Nav, NavDropdown, Row} from "react-bootstrap";
+import {LogOut} from 'react-feather';
 import jwtDecode from "jwt-decode";
 import {useHistory} from 'react-router-dom';
+import userAvatar from '../assets/images/profile.png';
 
 const Header = () => {
 
@@ -24,11 +25,24 @@ const Header = () => {
             <Col xs={6}>
                 <h1 className="logo my-0 pl-2 text" onClick={() => history.push('/')}>Monitor</h1>
             </Col>
-            <Col xs={6} className="text-right">
-                <span className="user mr-4 d-none d-md-inline" onClick={handleUserClicked}><User/> {userName}</span>
-                <Button className="logout my-2 py-1 px-3" variant="outline-dark" onClick={handleLogout}>
-                    Logout &nbsp;&nbsp; <LogOut size={18}/>
-                </Button>
+            <Col xs={6}>
+                <Nav className='m-0 p-0 justify-content-end'>
+                    <NavDropdown className='profile'
+                                 title={
+                                     <Image className='avatar' src={userAvatar} roundedCircle/>
+                                 }
+                                 id="navbarScrollingDropdown" drop="left">
+                        <NavDropdown.Item disabled
+                                          className="text-dark font-weight-bold">{`Hi! ${userName}`}</NavDropdown.Item>
+                        <NavDropdown.Item onClick={handleUserClicked}>
+                            Account
+                        </NavDropdown.Item>
+                        <NavDropdown.Divider/>
+                        <NavDropdown.Item onClick={handleLogout}>Logout
+                            <LogOut className="ml-3" size={16}/>
+                        </NavDropdown.Item>
+                    </NavDropdown>
+                </Nav>
             </Col>
         </Row>
     );
