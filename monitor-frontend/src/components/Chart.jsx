@@ -44,25 +44,25 @@ const Chart = ({sensor}) => {
         scales: {
             x: {
                 type: 'time',
-                // time: {
-                //     unit: 'hour',
-                // },
+                time: {
+                    unit: 'hour',
+                },
                 ticks: {
                     // // Include a dollar sign in the ticks
                     // callback: function(value, index, values) {
                     //     return
                     // }
-                    maxTickLimit: 10
+                    maxTicksLimit: 24
                 },
                 title: {
                     display: true,
-                    text: "Time"
+                    text: "Time (Hour)"
                 }
             },
             y: {
                 title: {
                     display: true,
-                    text: `C`
+                    text: `\u00B0C`
                 },
                 beginAtZero: true
             }

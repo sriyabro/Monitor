@@ -100,9 +100,9 @@ const UserProfile = () => {
 
     const handleAddData = () => {
         Swal.fire({
-            title: 'Add Data',
-            text: `Add data with random reading value to all sensors in user account every 3 seconds for 5 mins or until the application is refreshed`,
-            icon: 'question',
+            title: 'Add Mock Data',
+            text: `Add data with random reading value for random times within a day to all sensors in user account`,
+            icon: 'info',
             showCancelButton: true,
             confirmButtonColor: '#d33',
             cancelButtonColor: '#3085d6',
