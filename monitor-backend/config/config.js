@@ -2,7 +2,6 @@ const nodemailer = require('nodemailer');
 const Vonage = require('@vonage/server-sdk');
 require('dotenv').config();
 const vonagePrivateKey = `${__dirname}/${process.env.VONAGE_PRIVATE_KEY}`;
-console.log(vonagePrivateKey);
 
 const admin_email = process.env.EMAIL;
 const admin_number = process.env.NUMBER;
