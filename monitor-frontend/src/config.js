@@ -1,1 +1,1 @@
-export const BACKEND_URL = "https://monitor-backend.herokuapp.com";
+export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
