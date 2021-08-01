@@ -9,3 +9,16 @@
 - [Lahiru Chalana](https://github.com/lahiruchalana)
 - [Rahul Maduka](https://github.com/RahulMadhukaKeshara)
 - [Sriyanjith Herath](https://github.com/sriyabro)
+
+#### Project deployed at - https://monitor-b9f93.web.app/
+
+---
+
+Use following credentials to view mock data
+  
+  Email: 
+  
+    user@monitor.com
+  Password: 
+    
+    123

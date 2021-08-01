@@ -1,0 +1,41 @@
+.user-profile {
+
+  .css-26l3qy-menu {
+    width: 300px;
+  }
+
+  .back {
+    background-color: transparent;
+  }
+
+  .back:hover {
+    background-color: rgba(217, 83, 79, 0.2);
+  }
+
+  .sensor-list {
+    overflow-y: scroll;
+    max-height: 68vh;
+    min-height: 68vh;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: -ms-autohiding-scrollbar; /* Internet Explorer 10+ */
+
+    .sensor:hover {
+      background-color: rgba(41, 43, 44, 0.2);
+    }
+
+    .delete-col {
+      display: flex;
+      align-items: center;
+
+      .delete {
+        vertical-align: center;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .auto-data {
+    position: fixed;
+    bottom: 50px;
+  }
+}

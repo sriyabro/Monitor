@@ -1,0 +1,34 @@
+.sensors {
+  .sensor-name {
+    font-size: 1.8em;
+    font-weight: 500;
+  }
+  .current-value {
+    font-size: 1.5em;
+    font-weight: 500;
+  }
+  .new-sensor {
+    background-color: transparent;
+    color: green;
+    border: 1px solid green;
+  }
+  .new-sensor:hover {
+    background-color: rgba(92,184,92, 0.2);
+  }
+
+  .history {
+    background-color: transparent;
+    cursor: pointer;
+  }
+  .history:hover {
+    background-color: rgba(217,83,79,0.2);
+  }
+  .chart {
+    min-height: 65vh;
+
+
+    canvas {
+      max-height: 65vh;
+    }
+  }
+}

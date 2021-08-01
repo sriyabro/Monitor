@@ -1,0 +1,27 @@
+.header {
+  font-size: 1em;
+  border-bottom: 1px solid gray;
+  z-index: 10;
+
+  .user {
+    cursor: pointer;
+  }
+
+  .user:hover {
+    color: #d9534f;
+  }
+
+  .logout {
+    vertical-align: center;
+  }
+
+  .profile {
+    right: 0;
+  .dropdown-toggle {
+    padding: 0;
+    .avatar {
+      width: 45px;
+    }
+  }
+  }
+}
