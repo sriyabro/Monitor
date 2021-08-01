@@ -1,14 +1,14 @@
 import React from 'react'
-import {Avatar, Button, Grid, Paper, TextField, Typography} from '@material-ui/core'
+import {Avatar, Button, Grid, Link, Paper, TextField, Typography} from '@material-ui/core'
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import {ErrorMessage, Field, Form, Formik} from 'formik'
 import * as Yup from 'yup'
 import Axios from 'axios';
 import Swal from 'sweetalert2';
-import {BACKEND_URL} from "../constants/constants";
+import {BACKEND_URL} from "../../config";
 
 
-const Signup = () => {
+const Signup = ({ handleChange }) => {
 
     const url = BACKEND_URL + '/users/add';
     const paperStyle = { padding: 20, width: 300, margin: "0 auto" }
@@ -41,11 +41,13 @@ const Signup = () => {
         })
         .then((res)=>{
             console.log(res.data)
+
             if(res.data === "User Added!"){
                 Swal.fire({
                   icon: 'success',
                   title: 'Registered In Successfully!',
                 })
+                handleChange("event", 0);
         
             }
 
@@ -58,12 +60,13 @@ const Signup = () => {
             }
             
         })
-        .catch(() => {
+        .catch((err) => {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Something went wrong!',
+                text: err,
               })
+            console.log(err)
           });
         props.resetForm()
     }
@@ -98,6 +101,11 @@ const Signup = () => {
                         </Form>
                     )}
                 </Formik>
+                <Typography > Already have an account?&nbsp;
+                    <Link href="#" onClick={() => handleChange("event", 0)} >
+                        Log In
+                    </Link>
+                </Typography>
             </Paper>
         </Grid>
     )

@@ -1,33 +1,35 @@
 import React, {useEffect, useState} from "react";
 import {Line} from "react-chartjs-2";
 import {Col} from "react-bootstrap";
+import 'chartjs-adapter-luxon';
 
 const Chart = ({sensor}) => {
-
-    const [sensorValues, setSensorValues] = useState([]);
-    const [sensorTimes, setSensorTimes] = useState([]);
     const [selectedSensorLabel, setSelectedSensorLabel] = useState(null);
+    const [dataArray, setDataArray] = useState([]);
 
     useEffect(() => {
-        const sensor_times = []; //labels
-        const sensor_values = []; //data
-       sensor?.sensor_readings.forEach((reading) => {
-           sensor_times.push(reading.date_time.split(' ')[1].split(':')[0]);
-           sensor_values.push(parseFloat(reading.values.toString()));
-       });
-       setSelectedSensorLabel(!sensor ? "No Sensor Selected" : sensor.sensor_name);
-       setSensorTimes(sensor_times);
-       setSensorValues(sensor_values);
-   }, [sensor]);
+        const dataPairs = []; //data {x: time, y: value}
+        sensor?.sensor_readings.forEach((reading) => {
+
+            let date = new Date(reading.date_time);
+            dataPairs.push(
+                {
+                    x: date.toLocaleTimeString(),
+                    y: parseFloat(reading.values.toString())
+                }
+            );
+        });
+        setSelectedSensorLabel(!sensor ? "No Sensor Selected" : sensor.sensor_name);
+        setDataArray(dataPairs);
+    }, [sensor]);
 
     // const down = (ctx, value) => ctx.p0.parsed.y > ctx.p1.parsed.y ? value : undefined;
 
     const data = {
-        labels: sensorTimes,
         datasets: [
             {
                 label: selectedSensorLabel,
-                data: sensorValues,
+                data: dataArray,
                 fill: true,
                 backgroundColor: "rgba(75,192,192,0.2)",
                 borderColor: "rgba(75,192,192,1)",
@@ -40,14 +42,32 @@ const Chart = ({sensor}) => {
 
     const options = {
         scales: {
-            y: {
-                title : {
-                  display: true,
-                  text: "C"
+            x: {
+                type: 'time',
+                time: {
+                    unit: 'hour',
                 },
-                beginAtZero : true
+                ticks: {
+                    // // Include a dollar sign in the ticks
+                    // callback: function(value, index, values) {
+                    //     return
+                    // }
+                    maxTicksLimit: 24
+                },
+                title: {
+                    display: true,
+                    text: "Time (Hour)"
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: `\u00B0C`
+                },
+                beginAtZero: true
             }
-        }
+        },
+        maintainAspectRatio: false
     };
 
     return (

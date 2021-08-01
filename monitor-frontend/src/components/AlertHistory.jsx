@@ -12,7 +12,7 @@ import {BarChart2, ChevronLeft} from "react-feather";
 import {useHistory} from "react-router-dom";
 import Header from "./Header";
 import Axios from "axios";
-import {BACKEND_URL} from "../constants/constants";
+import {BACKEND_URL} from "../config";
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -65,7 +65,7 @@ const AlertHistory = () => {
 
 
     const handleBackButtonClicked = () => {
-        history.push('/dashboard');
+        history.push('/');
     }
 
     return (

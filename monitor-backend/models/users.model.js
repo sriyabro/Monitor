@@ -6,7 +6,8 @@ const usersSchema = new Schema({
     user_Name: {type:String , required: true},
     user_Contact: {type:String , required: true},
     user_Email: {type:String , required: true},
-    user_Password: {type:String}
+    user_Password: {type:String},
+    notification: {type:String}
 
 },  {
     timestamps: true,

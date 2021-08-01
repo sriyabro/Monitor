@@ -1,4 +1,9 @@
 .user-profile {
+
+  .css-26l3qy-menu {
+    width: 300px;
+  }
+
   .back {
     background-color: transparent;
   }
@@ -27,5 +32,10 @@
         cursor: pointer;
       }
     }
+  }
+
+  .auto-data {
+    position: fixed;
+    bottom: 50px;
   }
 }

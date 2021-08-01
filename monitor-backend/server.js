@@ -11,7 +11,7 @@ app.use(cors({origin: true, credentials: true}));
 app.use(express.json({limit: '50mb', extended: true}));
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri,{useNewUrlParser: true , useCreateIndex: true, useUnifiedTopology: true});
+mongoose.connect(uri,{useNewUrlParser: true , useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false});
 
 mongoose.connection.once('open' , () => {
     console.log("MongoDB database connection established successfully");

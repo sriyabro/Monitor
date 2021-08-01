@@ -40,7 +40,7 @@ router.route('/data').post(async(req,res) => {
         date_time : req.body.date_time
     })
 
-    if(sensor.sensor_threshold <= req.body.values){
+    if(parseFloat(sensor.sensor_threshold)<= parseFloat(req.body.values)){
         alertUser(sensor, req.body.values);
     }
 

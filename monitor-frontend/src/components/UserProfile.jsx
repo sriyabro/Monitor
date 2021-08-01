@@ -6,7 +6,10 @@ import Axios from "axios";
 import Sensor from "./Sensor";
 import {BarChart2, ChevronLeft} from "react-feather";
 import {useHistory} from "react-router-dom";
-import {BACKEND_URL} from "../constants/constants";
+import {BACKEND_URL} from "../config";
+import Select from "react-select";
+import Swal from "sweetalert2";
+import {notificationOptions, notificationSelectStyles} from "../constants/constants";
 
 const UserProfile = () => {
     const jwt = localStorage.getItem("token");
@@ -46,14 +49,50 @@ const UserProfile = () => {
     useEffect(() => {
         getUserDetails();
         getUserSensors();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
         getUserSensors();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [deleted])
 
     const handleBackButtonClicked = () => {
-        history.push('/dashboard')
+        history.push('/')
+    }
+
+    const handleNotificationChange = (option) => {
+        let selectedOption = option;
+        if (option) {
+            Swal.fire({
+                title: 'Update Notification Method',
+                text: `Set Notification Method to ${selectedOption.label}?`,
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonColor: '#3085d6',
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Confirm'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    try {
+                        Axios.post(
+                            BACKEND_URL + "/users/" + user._id,
+                            {notification: selectedOption}
+                        ).then((res) => {
+                            getUserDetails().then(() => {
+                                Swal.fire(
+                                    'Done!',
+                                    res.data,
+                                    'success'
+                                );
+                            });
+                        })
+                    } catch (err) {
+                        console.log(err);
+                    }
+                }
+            })
+        }
     }
 
     return (
@@ -65,6 +104,14 @@ const UserProfile = () => {
                     <h5 className="p-1">Username: <span className="text-dark">{user?.user_Name}</span></h5>
                     <h5 className="p-1">Email: <span className="text-dark">{user?.user_Email}</span></h5>
                     <h5 className="p-1">Contact No.: <span className="text-dark">{user?.user_Contact}</span></h5>
+
+                    <h5 className="px-1 pt-5">Select Notification Method: </h5>
+                    <Select className="ml-3"
+                            options={notificationOptions}
+                            styles={notificationSelectStyles}
+                            onChange={handleNotificationChange}
+                            value={notificationOptions?.filter(option => option.value === user?.notification)}
+                    />
                 </Col>
                 <Col xs={12} md={6}>
                     <Row>

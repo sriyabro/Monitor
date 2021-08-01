@@ -4,8 +4,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Login from '../components/Login'
-import Signup from '../components/Signup'
+import Login from '../components/auth/Login'
+import Signup from '../components/auth/Signup'
 
 const SignInOutContainer = () => {
     const [value,setValue] = useState(0)
@@ -34,7 +34,7 @@ const SignInOutContainer = () => {
     }
 
         return (
-            <Paper elevation={20} style={paperStyle}>
+            <Paper elevation={20} style={paperStyle} >
                 <Tabs
                     value={value}
                     indicatorColor="primary"
@@ -50,7 +50,7 @@ const SignInOutContainer = () => {
                     <Login handleChange={handleChange}/>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <Signup/>
+                    <Signup handleChange={handleChange}/>
                 </TabPanel>
             </Paper>
     )

@@ -1,11 +1,11 @@
 import Dashboard from '../components/Dashboard';
 import AlertHistory from '../components/AlertHistory';
-import SignInOutContainer from "../containers/index";
+import SignInOutContainer from "../containers/SignInOutContainer";
 import UserProfile from "../components/UserProfile";
 
 const routes = [
     {
-        path: '/dashboard',
+        path: '/',
         exact: true,
         component: Dashboard,
         name: 'Dashboard',
@@ -22,7 +22,7 @@ const routes = [
 
     },
     {
-        path: '/',
+        path: '/login',
         exact: true,
         component: SignInOutContainer,
         name: 'SignUp',
