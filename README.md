@@ -1,7 +1,7 @@
 # Monitor App
 ## Cloud-based Sensor Monitoring and Alert Management Platform
 
-This system is a cloud-based sensor monitoring and alert management platform that allows you to centrally monitor any device regardless of its location. 
+This system is a cloud-based sensor monitoring and alert management platform that allows you to centrally monitor any sensor regardless of its location. 
 
 The main functionality of the system is to alert certain events based on sensor readings through the selected notification channel. (Email, Text, Voice)
 
